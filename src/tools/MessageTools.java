@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.Document;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.mongodb.client.MongoClient;
@@ -17,10 +18,10 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
-//POOLING A TRUE CAD PAS EN LOCAL UTILISE LE DATA SOURCE 
-//SEARCH A FAIRE 3 CAS PAGE PRINCIPAL PROFIL OU SEARCH
 
-public class MessageTools {//AJOUTER LA DATE ET LOGIN !!!!!!!!!!
+//SEARCH A FAIRE: 3 CAS PAGE PRINCIPAL PROFIL OU SEARCH
+
+public class MessageTools {
 	
 	public static void postMessage(String key, String text) {
 		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
@@ -80,21 +81,31 @@ public class MessageTools {//AJOUTER LA DATE ET LOGIN !!!!!!!!!!
 			Document d=new Document();
 			d.append("$in", list_ami);
 			doc.append("log_friend", d);
+			System.out.println("D"+d.toString());
+			System.out.println("DOC"+doc.toString());
 			//DOC LE PROBLEME 
+			//TRY TABLEAU DE STRING
+			//OU TRY 
+			//doc.append("log_friend",new Document("$in",list_ami));
 			Document date_doc=new Document();
 			date_doc.put("date", -1);
 			
 			MongoCursor<Document> list=coll.find(doc).sort(date_doc).iterator();
+			JSONObject res=new JSONObject();
 			while(list.hasNext()) {
 				Document o=list.next();
+				res.put("message", o.get("message"));
+				res.put("auteur", o.get("login"));//verif si login
 				System.out.println(o);
 			}
-			return ReturnJSON.serviceAccepted();
+			return res;
 			
 		}
 		catch (SQLException e1) {
 			return ReturnJSON.serviceRefused("SQL ERROR", 0);
 		} catch (ClassNotFoundException e) {
+			return ReturnJSON.serviceRefused("SQL ERROR", 0);
+		} catch (JSONException e) {
 			return ReturnJSON.serviceRefused("SQL ERROR", 0);
 		}
 	}
