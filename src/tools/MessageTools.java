@@ -22,6 +22,7 @@ import com.mongodb.client.MongoDatabase;
 //SEARCH A FAIRE: 3 CAS PAGE PRINCIPAL PROFIL OU SEARCH
 
 public class MessageTools {
+	//private static int cpt=0;
 	
 	public static void postMessage(String key, String text) {
 		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
@@ -36,21 +37,43 @@ public class MessageTools {
 		d.append("login", login);
 		d.append("date",UserTools.getDate());
 		
-		//test
 		coll.insertOne(d);
-		System.out.println("HERE");
 		Document doc=new Document();
 		doc.append("key", key);
 		MongoCursor<Document> list=coll.find(doc).iterator();
 		while(list.hasNext()) {
 			Document o=list.next();
-			System.out.println(o);
+			//System.out.println(o);
 		}
 	}
+	/*public static void postMessage(String key, String text) {
+		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
+		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
+		
+		MongoCollection <Document> coll = mDB.getCollection("messages");
+		Document d=new Document();
+		d.append("message", text);
+		d.append("key", key);
+		String login=UserTools.getLoginUser(key);
+		d.append("login", login);
+		d.append("date",UserTools.getDate());
+		d.append("id", cpt++);
+		
+		coll.insertOne(d);
+		Document doc=new Document();
+		doc.append("key", key);
+			MongoCursor<Document> list=coll.find(doc).iterator();
+			while(list.hasNext()) {
+				Document o=list.next();
+				System.out.println(o);
+			}
+		}*/
 
 	public static JSONObject ListAllMessage(String key) {
 		try {
-			System.out.println("DEBUT");
+			if(!CheckTools.checkUserConnected(key))
+				return ReturnJSON.serviceRefused("Not connected", 0);
+			
 			Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost/Brunet_Lin";
 			Connection conn= DriverManager.getConnection(url,"root","root");
@@ -66,9 +89,11 @@ public class MessageTools {
 			
 			rs = st.executeQuery(query);
 			while(rs.next()) {
-				//System.out.println(rs.getString("log_friend"));
 				list_ami.add(rs.getString("log_friend"));
 			}
+			list_ami.add(login);//ON AJOUTE LUI MEME POUR AFFICHER SES PROPRES MESSAGES
+			//System.out.println(list_ami);
+			
 			st.close();
 			conn.close();
 			
@@ -78,26 +103,22 @@ public class MessageTools {
 			MongoCollection <Document> coll = mDB.getCollection("messages");
 			//recupere la liste des amis de mongodb
 			Document doc=new Document();
-			Document d=new Document();
-			d.append("$in", list_ami);
-			doc.append("log_friend", d);
-			System.out.println("D"+d.toString());
-			System.out.println("DOC"+doc.toString());
-			//DOC LE PROBLEME 
-			//TRY TABLEAU DE STRING
-			//OU TRY 
-			//doc.append("log_friend",new Document("$in",list_ami));
+			doc.append("login",new Document("$in",list_ami));
 			Document date_doc=new Document();
 			date_doc.put("date", -1);
 			
 			MongoCursor<Document> list=coll.find(doc).sort(date_doc).iterator();
-			JSONObject res=new JSONObject();
+			List<JSONObject> liste_json=new ArrayList<>();
 			while(list.hasNext()) {
 				Document o=list.next();
-				res.put("message", o.get("message"));
-				res.put("auteur", o.get("login"));//verif si login
-				System.out.println(o);
+				//System.out.println(o);
+				JSONObject temp=new JSONObject().put(o.getString("login"),o.get("message"));
+				
+				liste_json.add(temp);
 			}
+			
+			JSONObject res=new JSONObject().put("message", liste_json);
+			System.out.println(res);//AFFICHAGE MESSAGE
 			return res;
 			
 		}
@@ -111,12 +132,56 @@ public class MessageTools {
 	}
 
 	public static JSONObject ListProfile(String key, String friends) {
-		
-		return null;
+		try {
+			
+			if(!CheckTools.checkUserConnected(key))
+				return ReturnJSON.serviceRefused("Not connected", 0);
+			
+			MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
+			MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
+			
+			MongoCollection <Document> coll = mDB.getCollection("messages");
+			//recupere la liste des amis de mongodb
+			Document doc=new Document();
+			doc.append("login",friends);
+			Document date_doc=new Document();
+			date_doc.put("date", -1);
+			
+			MongoCursor<Document> list=coll.find().sort(date_doc).iterator();
+			JSONObject res=new JSONObject();
+			List<String> list_message=new ArrayList<>();
+			while(list.hasNext()) {//Parcours tout les messages et ajoute les messages dans une liste
+				Document o=list.next();
+				System.out.println(o);
+				list_message.add((String)o.get("message"));
+				res.put("auteur", o.get("login"));
+
+			}
+			res.put("message", list_message);//ajoute la liste des messages dans le JSON
+			return res;
+			
+		} catch (JSONException e) {
+			return ReturnJSON.serviceRefused("SQL ERROR", 0);
+		}
 	}
 
 	public static JSONObject ListByQuery(String key, String query) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public static JSONObject RemoveMessage(String key, int id) {
+		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
+		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
+		
+		MongoCollection <Document> coll = mDB.getCollection("messages");
+		
+		Document d=new Document();
+		d.append("id", id);
+		d.append("key", key);
+
+		coll.deleteOne(d);
+		return ReturnJSON.serviceAccepted();
+		
 	}
 }

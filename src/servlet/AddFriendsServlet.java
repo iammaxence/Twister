@@ -38,7 +38,7 @@ public class AddFriendsServlet extends HttpServlet {
 		String key=request.getParameter("key");
 		String logFriend=request.getParameter("login_friend");
 		
-		response.setContentType("test/json");
+		response.setContentType("text/json");
 		PrintWriter out=response.getWriter();
 		JSONObject o = Friends.addFriend(key, logFriend);
 		out.println(o);

@@ -777,26 +777,31 @@ standard deployment descriptor.
     <servlet-name>createUser</servlet-name>
     <servlet-class> servlet.UserServlet </servlet-class>
   </servlet>
-   <servlet>
+  <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class> servlet.LoginServlet </servlet-class>
   </servlet>
-   <servlet>
+  <servlet>
     <servlet-name>Logout</servlet-name>
     <servlet-class> servlet.LogoutServlet </servlet-class>
   </servlet>
-   <servlet>
+  <servlet>
     <servlet-name>AddFriend</servlet-name>
     <servlet-class> servlet.AddFriendsServlet </servlet-class>
   </servlet>
-   <servlet>
+  <servlet>
     <servlet-name>RemoveFriend</servlet-name>
-    <servlet-class> servlet.RemoveFriendsServlet </servlet-class>
+    <servlet-class> servlet.RemoveFriendServlet </servlet-class>
   </servlet>
-   <servlet>
-    <servlet-name>AddComment</servlet-name>
-    <servlet-class> servlet.AddCommentServlet </servlet-class>
+  <servlet>
+    <servlet-name>AddMessage</servlet-name>
+    <servlet-class> servlet.AddMessageServlet </servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ListMessage</servlet-name>
+    <servlet-class> servlet.ListMessageServlet </servlet-class>
+  </servlet>
+  
   
   <servlet-mapping>
     <servlet-name>createUser</servlet-name>
@@ -819,8 +824,11 @@ standard deployment descriptor.
     <url-pattern> /user/removefriend </url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>AddComment</servlet-name>
-    <url-pattern> /message/addcomment </url-pattern>
+    <servlet-name>AddMessage</servlet-name>
+    <url-pattern> /message/addmessage </url-pattern>
   </servlet-mapping>
-  
+  <servlet-mapping>
+    <servlet-name>ListMessage</servlet-name>
+    <url-pattern> /message/listmessage </url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -22,7 +22,7 @@ public class CheckTools {
 			Connection conn= DriverManager.getConnection(url,"root","root");
 			
 			String query="SELECT * FROM session WHERE session.key_user='"+key+"'";
-			System.out.println(query);
+			//System.out.println(query);
 			
 			Statement st=conn.createStatement();
 			ResultSet rs=st.executeQuery(query);
@@ -37,7 +37,6 @@ public class CheckTools {
 			return false;
 		}
 		catch (SQLException s) {
-			System.out.println("herE"); // a enlever après test
 			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 101));
 			return false;
 		}
@@ -199,11 +198,10 @@ public class CheckTools {
 
 			st.close();
 			conn.close();
-			return true;
+			return false;
 			
 		}
 		catch (SQLException s) {
-			System.out.println("RMFRIENDERROR"); // a enlever après test
 			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 101));
 			return false;
 		}

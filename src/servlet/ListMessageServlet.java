@@ -11,20 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import services.Friends;
 import services.Message;
 
 /**
- * Servlet implementation class AddCommentServlet
+ * Servlet implementation class ListMessageServlet
  */
-@WebServlet("/AddCommentServlet")
-public class AddCommentServlet extends HttpServlet {
+@WebServlet("/ListMessageServlet")
+public class ListMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddCommentServlet() {
+    public ListMessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +32,15 @@ public class AddCommentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-
 		String key=request.getParameter("key");
-		String text=request.getParameter("text");
-
+		String query=request.getParameter("query");
+		String friends=request.getParameter("friends");
 		
-		response.setContentType("test/json");
+
+		response.setContentType("text/json");
 		PrintWriter out=response.getWriter();
-		JSONObject o = Message.postMessage(key, text);
+		JSONObject o = Message.listMessage(key, query, friends);
 		out.println(o);
 	}
-
 
 }

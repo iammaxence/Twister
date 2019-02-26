@@ -36,7 +36,6 @@ public class AuthTools {
 			return alea;
 		}
 		catch (SQLException s) {
-			System.out.println("here8");
 			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 101));
 			return new StringBuilder();
 		}
@@ -60,7 +59,6 @@ public class AuthTools {
 		       int i = (int)Math.floor(Math.random() * 62);
 		       pass += chars.charAt(i);
 		    }
-		   // System.out.println(pass);
 		    return pass;
 	}
 	
@@ -83,7 +81,6 @@ public class AuthTools {
 			conn.close();
 		}
 		catch (SQLException s) {
-			//System.out.println("here8");
 			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 310));
 		}
 		catch (ClassNotFoundException c ) {

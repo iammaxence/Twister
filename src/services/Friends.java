@@ -16,13 +16,16 @@ public class Friends {
 	 */
 	public static JSONObject addFriend(String key,String logFriend) { 
 		
-		if(!CheckTools.checkUserConnected(key)) {
+		if(!CheckTools.checkUserConnected(key)) 
 			return ReturnJSON.serviceRefused("User Disconnected", 501);
-		}
 		
-		if(!CheckTools.exist(logFriend)) {
+		if(!CheckTools.exist(logFriend)) 
 			return ReturnJSON.serviceRefused("Friend not exist", 502);
-		}
+
+		if(CheckTools.isFriend(key, logFriend)) 
+			return ReturnJSON.serviceRefused("Already friends", 503);
+		
+			
 		//System.out.println("JE SUIS ARRIVER");
 		tools.UserTools.AddFriend(key,logFriend);
 			

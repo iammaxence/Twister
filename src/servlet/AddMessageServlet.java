@@ -12,19 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import services.Friends;
-import services.User;
+import services.Message;
 
 /**
- * Servlet implementation class RemoveFriendServlet
+ * Servlet implementation class AddCommentServlet
  */
-@WebServlet("/RemoveFriendServlet")
-public class RemoveFriendServlet extends HttpServlet {
+@WebServlet("/AddCommentServlet")
+public class AddMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RemoveFriendServlet() {
+    public AddMessageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,14 +36,14 @@ public class RemoveFriendServlet extends HttpServlet {
 		
 
 		String key=request.getParameter("key");
-		String logFriend=request.getParameter("login_friend");
+		String text=request.getParameter("text");
+
 		
 		response.setContentType("text/json");
 		PrintWriter out=response.getWriter();
-		JSONObject o = Friends.removeFriend(key, logFriend);
+		JSONObject o = Message.postMessage(key, text);
 		out.println(o);
 	}
 
-	
 
 }

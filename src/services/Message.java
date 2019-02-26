@@ -24,7 +24,9 @@ public class Message {
 		return ReturnJSON.serviceAccepted();
 	}
 	
-	public static JSONObject ListMessage(String key, String query ,String friends) {
+	public static JSONObject listMessage(String key, String query ,String friends) {
+		if(!tools.UserTools.connected(key))
+			return ReturnJSON.serviceRefused("USER DISCONNECTED", 401);
 		if (key==null)
 			return ReturnJSON.serviceRefused("Not connected", 0);
 		if(query!=null && friends==null)
@@ -33,7 +35,13 @@ public class Message {
 			return MessageTools.ListProfile(key,friends);
 		return MessageTools.ListAllMessage(key);
 	}
-
+	
+	public static JSONObject removeMessage(String key,int id) {
+		if(!tools.UserTools.connected(key))
+			return ReturnJSON.serviceRefused("USER DISCONNECTED", 401);
+		
+		return MessageTools.RemoveMessage(key,id);
+	}
 
 	
 }

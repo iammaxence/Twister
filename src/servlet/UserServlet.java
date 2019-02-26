@@ -17,7 +17,7 @@ public class UserServlet extends HttpServlet {
 		String nom=request.getParameter("nom");
 		String prenom=request.getParameter("prenom");
 		String mail=request.getParameter("mail");
-		response.setContentType("test/json");
+		response.setContentType("text/json");
 		PrintWriter out=response.getWriter();
 		JSONObject o = new User().createUser(nom,prenom,login, psswd,mail);
 		out.println(o);

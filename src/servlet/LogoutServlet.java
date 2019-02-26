@@ -36,7 +36,7 @@ public class LogoutServlet extends HttpServlet {
 		String key=request.getParameter("key"); 
 		
 		JSONObject j= Auth.deconnexion(key);
-		response.setContentType("test/json");
+		response.setContentType("text/json");
 		PrintWriter out=response.getWriter(); //Affiche la réponse?
 		out.println(j);
 	}
