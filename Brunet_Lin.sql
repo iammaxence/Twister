@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Jeu 21 Février 2019 à 16:17
--- Version du serveur :  5.7.22
+-- Généré le :  Mar 26 Février 2019 à 15:51
+-- Version du serveur :  5.7.23
 -- Version de PHP :  7.0.33-0+deb9u1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -32,6 +32,13 @@ CREATE TABLE `friends` (
   `date_friendship` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `friends`
+--
+
+INSERT INTO `friends` (`log_user`, `log_friend`, `date_friendship`) VALUES
+('toto', 'tata', '2019-02-26 11:12:44');
+
 -- --------------------------------------------------------
 
 --
@@ -40,15 +47,19 @@ CREATE TABLE `friends` (
 
 CREATE TABLE `session` (
   `login` varchar(64) NOT NULL,
-  `key_user` varchar(64) NOT NULL
+  `key_user` varchar(64) NOT NULL,
+  `date_connexion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `session`
 --
 
-INSERT INTO `session` (`login`, `key_user`) VALUES
-('toto', 'I8dZFCw2eTzYY1Po');
+INSERT INTO `session` (`login`, `key_user`, `date_connexion`) VALUES
+('tata', 'AiXkwR9Eg1V5w9uI', '2019-02-26 13:57:53'),
+('toto', 'I8dZFCw2eTzYY1Po', '2019-02-26 13:57:53'),
+('veyracklog', 'iPfMHJpJnMTJ1Z0t', '2019-02-26 13:57:53'),
+('tatou', 'sk2k6kz0H94ZDu6R', '2019-02-26 14:31:13');
 
 -- --------------------------------------------------------
 
@@ -69,19 +80,15 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`login`, `password`, `prenom`, `nom`, `mail`) VALUES
+('Spiderman', 0x6d6470, 'Peter', 'Parker', 'spider@gmail.com'),
 ('tata', 0x6d6470, 'second_prenom', 'second_name', 'othermail@gmail.com'),
-('toto', 0x6d6f7464657061737365, 'first_prenom', 'first_nom', 'mail@gmail.com');
+('tatou', 0x6d6470, 'tatou', 'tati', 'mail2@gmail.com'),
+('toto', 0x6d6f7464657061737365, 'first_prenom', 'first_nom', 'mail@gmail.com'),
+('veyracklog', 0x6d6470, 'veyrack', 'lin', 'veymail@gmail.com');
 
 --
 -- Index pour les tables exportées
 --
-
---
--- Index pour la table `friends`
---
-ALTER TABLE `friends`
-  ADD PRIMARY KEY (`log_user`),
-  ADD KEY `log_friend_unique` (`log_friend`);
 
 --
 -- Index pour la table `session`
@@ -102,13 +109,6 @@ ALTER TABLE `user`
 --
 
 --
--- Contraintes pour la table `friends`
---
-ALTER TABLE `friends`
-  ADD CONSTRAINT `log_friend_unique` FOREIGN KEY (`log_friend`) REFERENCES `user` (`login`),
-  ADD CONSTRAINT `log_user_unique` FOREIGN KEY (`log_user`) REFERENCES `user` (`login`);
-
---
 -- Contraintes pour la table `session`
 --
 ALTER TABLE `session`
@@ -117,4 +117,3 @@ ALTER TABLE `session`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
