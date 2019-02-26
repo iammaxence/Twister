@@ -5,6 +5,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.annotation.Generated;
 
 public class CheckTools {
 	
@@ -16,7 +21,6 @@ public class CheckTools {
 	public static boolean checkUserConnected(String key) {
 		try {
 			
-			
 			Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost/Brunet_Lin";
 			Connection conn= DriverManager.getConnection(url,"root","root");
@@ -27,8 +31,9 @@ public class CheckTools {
 			Statement st=conn.createStatement();
 			ResultSet rs=st.executeQuery(query);
 			
-			if(rs.next()) { //si user existe dans la base de données session => il est déjà connecté
-				//if(rs.getString("key_user")!=null) //Si la clée n'est pas null, user déjà connecté
+			if(rs.next()) { 
+				if(!checkKeyValidity(rs.getString("date_connexion"),key))//Test la validité de la clé (A VERIFIER)
+					return false;
 				return true;
 			}
 			
@@ -37,16 +42,38 @@ public class CheckTools {
 			return false;
 		}
 		catch (SQLException s) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 101));
+			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 110));
 			return false;
 		}
 		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 102));
+			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 120));
 			return false;
 		}
 		
 	}
 	
+	public static boolean checkKeyValidity(String date,String key) {
+		String d_current=UserTools.getDate();//Date courrante
+		Date current = null;
+		Date key_date = null;
+		try {
+			current = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(d_current);
+			key_date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		long seconds = (current.getTime() - key_date.getTime())/3600000;
+		
+		System.out.println(seconds);
+		if(seconds >= 0) {
+			AuthTools.deconnexion(key);
+			return false;
+		}
+			
+		return true;
+	}
+
+
 	/**
 	 * Check si le password est le bon
 	 * @param login

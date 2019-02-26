@@ -19,7 +19,7 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
 
-//SEARCH A FAIRE: 3 CAS PAGE PRINCIPAL PROFIL OU SEARCH
+
 
 public class MessageTools {
 	//private static int cpt=0;
@@ -29,15 +29,15 @@ public class MessageTools {
 		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
 		
 		MongoCollection <Document> coll = mDB.getCollection("messages");
-		
 		Document d=new Document();
 		d.append("message", text);
 		d.append("key", key);
 		String login=UserTools.getLoginUser(key);
 		d.append("login", login);
 		d.append("date",UserTools.getDate());
-		
+		//d.append("id"
 		coll.insertOne(d);
+		
 		Document doc=new Document();
 		doc.append("key", key);
 		MongoCursor<Document> list=coll.find(doc).iterator();
@@ -71,9 +71,7 @@ public class MessageTools {
 
 	public static JSONObject ListAllMessage(String key) {
 		try {
-			if(!CheckTools.checkUserConnected(key))
-				return ReturnJSON.serviceRefused("Not connected", 0);
-			
+						
 			Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost/Brunet_Lin";
 			Connection conn= DriverManager.getConnection(url,"root","root");
@@ -123,11 +121,11 @@ public class MessageTools {
 			
 		}
 		catch (SQLException e1) {
-			return ReturnJSON.serviceRefused("SQL ERROR", 0);
+			return ReturnJSON.serviceRefused("SQL ERROR", 710);
 		} catch (ClassNotFoundException e) {
-			return ReturnJSON.serviceRefused("SQL ERROR", 0);
+			return ReturnJSON.serviceRefused("Class not found", 720);
 		} catch (JSONException e) {
-			return ReturnJSON.serviceRefused("SQL ERROR", 0);
+			return ReturnJSON.serviceRefused("JSON Exception", 730);
 		}
 	}
 

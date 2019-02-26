@@ -26,9 +26,7 @@ public class Message {
 	
 	public static JSONObject listMessage(String key, String query ,String friends) {
 		if(!tools.UserTools.connected(key))
-			return ReturnJSON.serviceRefused("USER DISCONNECTED", 401);
-		if (key==null)
-			return ReturnJSON.serviceRefused("Not connected", 0);
+			return ReturnJSON.serviceRefused("USER DISCONNECTED", 701);
 		if(query!=null && friends==null)
 			return MessageTools.ListByQuery(key,query);
 		if(friends!=null && query==null)

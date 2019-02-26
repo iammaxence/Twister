@@ -13,13 +13,13 @@ public class UserServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login=request.getParameter("login");
-		String psswd=request.getParameter("psswd");
+		String psswd=request.getParameter("password");
 		String nom=request.getParameter("nom");
 		String prenom=request.getParameter("prenom");
 		String mail=request.getParameter("mail");
 		response.setContentType("text/json");
 		PrintWriter out=response.getWriter();
-		JSONObject o = new User().createUser(nom,prenom,login, psswd,mail);
+		JSONObject o = User.createUser(nom,prenom,login, psswd,mail);
 		out.println(o);
 	}
 }
