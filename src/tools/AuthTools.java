@@ -13,7 +13,7 @@ public class AuthTools {
 	 * @param log
 	 * @return
 	 */
-	public static StringBuilder insertNvlleSession(StringBuilder log) {
+	public static StringBuilder insertNvlleSession(StringBuilder log,int root) {
 		try {
 			
 			
@@ -26,8 +26,8 @@ public class AuthTools {
 			
 			StringBuilder alea=new StringBuilder().append(generate(16)); //génère une clée aleatoire
 			
-			String query="INSERT INTO session VALUES('"+log.toString()+"','"+alea.toString()+"','"+UserTools.getDate()+"')"; //attribue une clé a l'utilisateur qui souhaite se connecter
-			System.out.println(query);
+			String query="INSERT INTO session VALUES('"+log.toString()+"','"+alea.toString()+"','"+UserTools.getDate()+"','"+root+"')"; //attribue une clé a l'utilisateur qui souhaite se connecter
+			//System.out.println(query);
 			
 			Statement st=conn.createStatement();
 			st.executeUpdate(query);

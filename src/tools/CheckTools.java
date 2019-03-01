@@ -31,9 +31,17 @@ public class CheckTools {
 			Statement st=conn.createStatement();
 			ResultSet rs=st.executeQuery(query);
 			
+			if(Integer.parseInt(rs.getString("root"))==1)
+				return true;
+			
 			if(rs.next()) { 
-				if(!checkKeyValidity(rs.getString("date_connexion"),key))//Test la validité de la clé (A VERIFIER)
+				if(!checkKeyValidity(rs.getString("date_connexion"),key)) {//Test la validite de la cle (A VERIFIER)
+					AuthTools.deconnexion(key);
 					return false;
+				}
+				
+				String update="UPDATE session SET date_connexion='"+UserTools.getDate()+"' WHERE key_user='"+key+"'";
+				st.executeUpdate(update);
 				return true;
 			}
 			

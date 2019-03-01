@@ -15,7 +15,7 @@ public class Auth {
 	 * @param psswd
 	 * @return
 	 */
-	public static JSONObject connexion(String login,String psswd) {
+	public static JSONObject connexion(String login,String psswd,int root) {
 		if(!tools.CheckTools.exist(login)) {
 			return ReturnJSON.serviceRefused("User not found",201);
 		}
@@ -26,12 +26,13 @@ public class Auth {
 		
 		//A MODIFIER
 		//StringBuilder log= tools.Login.getLoginUser(login);
-		StringBuilder key=new StringBuilder().append(tools.AuthTools.insertNvlleSession(new StringBuilder(login))); //Optenir clé (qui expire)connexion
-		CheckTools.checkKeyValidity(, key)
+		StringBuilder key=new StringBuilder().append(tools.AuthTools.insertNvlleSession(new StringBuilder(login),root)); //Obtenir cle (qui expire)connexion
+		//CheckTools.checkKeyValidity(, key);
+		
 		if(key.length()==0) { //Si déjà connecter==longueur de la clée vide
 			return ReturnJSON.serviceRefused("Already Connected", 203);
 		}
-		else { //Sinon la connexion est réussite
+		else { //Sinon la connexion est reusssie
 			JSONObject js= new JSONObject();
 			try {
 				js.put("Login", login);

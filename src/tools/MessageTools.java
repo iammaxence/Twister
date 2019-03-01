@@ -35,16 +35,16 @@ public class MessageTools {
 		String login=UserTools.getLoginUser(key);
 		d.append("login", login);
 		d.append("date",UserTools.getDate());
-		//d.append("id"
-		coll.insertOne(d);
 		
+		coll.insertOne(d);
+		/*
 		Document doc=new Document();
 		doc.append("key", key);
 		MongoCursor<Document> list=coll.find(doc).iterator();
 		while(list.hasNext()) {
 			Document o=list.next();
 			//System.out.println(o);
-		}
+		}*/
 	}
 	/*public static void postMessage(String key, String text) {
 		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
@@ -168,15 +168,14 @@ public class MessageTools {
 		return null;
 	}
 
-	public static JSONObject RemoveMessage(String key, int id) {
+	public static JSONObject RemoveMessage(int id) {
 		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
 		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
 		
 		MongoCollection <Document> coll = mDB.getCollection("messages");
 		
 		Document d=new Document();
-		d.append("id", id);
-		d.append("key", key);
+		d.append("_id", id);
 
 		coll.deleteOne(d);
 		return ReturnJSON.serviceAccepted();

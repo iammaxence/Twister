@@ -36,8 +36,9 @@ public class LoginServlet extends HttpServlet {
 
 		String login=request.getParameter("login"); 
 		String password=request.getParameter("password");
+		int root=Integer.parseInt(request.getParameter("root"));
 		
-		JSONObject j= Auth.connexion(login, password);
+		JSONObject j= Auth.connexion(login, password,root);
 		response.setContentType("text/json");
 		PrintWriter out=response.getWriter(); //Affiche la réponse?
 		out.println(j);

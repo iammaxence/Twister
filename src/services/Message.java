@@ -3,6 +3,7 @@ package services;
 
 import org.json.JSONObject;
 
+import tools.CheckTools;
 import tools.MessageTools;
 import tools.ReturnJSON;
 
@@ -17,7 +18,7 @@ public class Message {
 	 * @return
 	 */
 	public static JSONObject postMessage(String key, String text) {
-		if(!tools.UserTools.connected(key))
+		if(!CheckTools.checkUserConnected(key))
 			return ReturnJSON.serviceRefused("USER DISCONNECTED", 401);
 		
 		tools.MessageTools.postMessage(key, text);
@@ -25,7 +26,7 @@ public class Message {
 	}
 	
 	public static JSONObject listMessage(String key, String query ,String friends) {
-		if(!tools.UserTools.connected(key))
+		if(!CheckTools.checkUserConnected(key))
 			return ReturnJSON.serviceRefused("USER DISCONNECTED", 701);
 		if(query!=null && friends==null)
 			return MessageTools.ListByQuery(key,query);
@@ -35,10 +36,10 @@ public class Message {
 	}
 	
 	public static JSONObject removeMessage(String key,int id) {
-		if(!tools.UserTools.connected(key))
+		if(!CheckTools.checkUserConnected(key))
 			return ReturnJSON.serviceRefused("USER DISCONNECTED", 401);
 		
-		return MessageTools.RemoveMessage(key,id);
+		return MessageTools.RemoveMessage(id);
 	}
 
 	
