@@ -2,22 +2,43 @@
 <html>
 <head>
 	<title>Twister</title>
-	<link rel = "stylesheet" type="text/css" href = "Principale.css"/>
+
+	<link rel = "stylesheet" href = "css/bootstrap.min.css"/>
+	<link rel = "stylesheet" href = "css/style.css"/>
+	<link rel="icon" type="image/png" href="images/logo.png"/>
 </head>
 <body>
-	<header>
-		<a href="Principale.html"><img src="logo.png" alt="logo"></img></a>
+	<!--AFFICHAGE DE LA BARRE DE NAVIGATION -->
+	<nav class="navbar navbar-expand-sm navbar-dark green1 fixed-top">
 
-		<div class="rech">
-			<input type="text" name="recherche"/>
-			<input type="submit" name="envoyer" value="Envoyer"/>	
+ 		<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+ 			<ul class="navbar-nav mr-auto">
+				<a href="Principale.html"><img src="images/logo.png" alt="Logo" style="width:40px;"></a>
+			</ul>
 		</div>
-		
 
-		<div class="link">
-			<a class="profil" href="Profil.html">profil</a>
-			<a class="deco" href="Connexion.html">deconnexion</a>
+		<div class="navbar-collapse collapse w-100 justify-content-center">		  	
+      		<form class="form-inline" action="/action_page.php">
+		    	<input class="form-control mr-sm-2" type="text" placeholder="Search">
+		    	<button class="btn white" type="submit">Search</button>
+	  		</form>
 		</div>
-	</header>
+
+		<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+			<ul class="navbar-nav ml-auto">
+		    	<li class="nav-item">
+		   			<a class="nav-link" href="Profil.html"> <button class="btn brown1" type="button">Profil</button> </a>
+		    	</li>
+
+		    	<li class="nav-item">
+		      		<a class="nav-link" href="Connexion.html"> <button class="btn brown1" type="button">Deconnexion</button> </a>
+		    	</li>
+		 	</ul>
+		 </div>
+	</nav>
+
+	<!--ZONE STATISTIQUE -->
+
+
 </body>
 </html>
