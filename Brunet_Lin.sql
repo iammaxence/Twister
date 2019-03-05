@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Mar 26 Février 2019 à 15:51
+-- Généré le :  Mar 05 Mars 2019 à 11:31
 -- Version du serveur :  5.7.23
--- Version de PHP :  7.0.33-0+deb9u1
+-- Version de PHP :  7.0.33-0+deb9u2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -48,18 +48,19 @@ INSERT INTO `friends` (`log_user`, `log_friend`, `date_friendship`) VALUES
 CREATE TABLE `session` (
   `login` varchar(64) NOT NULL,
   `key_user` varchar(64) NOT NULL,
-  `date_connexion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `date_connexion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `root` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `session`
 --
 
-INSERT INTO `session` (`login`, `key_user`, `date_connexion`) VALUES
-('tata', 'AiXkwR9Eg1V5w9uI', '2019-02-26 13:57:53'),
-('toto', 'I8dZFCw2eTzYY1Po', '2019-02-26 13:57:53'),
-('veyracklog', 'iPfMHJpJnMTJ1Z0t', '2019-02-26 13:57:53'),
-('tatou', 'sk2k6kz0H94ZDu6R', '2019-02-26 14:31:13');
+INSERT INTO `session` (`login`, `key_user`, `date_connexion`, `root`) VALUES
+('tata', 'AiXkwR9Eg1V5w9uI', '2019-02-26 13:57:53', 0),
+('toto', 'I8dZFCw2eTzYY1Po', '2019-02-26 13:57:53', 0),
+('veyracklog', 'iPfMHJpJnMTJ1Z0t', '2019-02-26 13:57:53', 0),
+('tatou', 'sk2k6kz0H94ZDu6R', '2019-02-26 14:31:13', 0);
 
 -- --------------------------------------------------------
 
