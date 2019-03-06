@@ -1,21 +1,3 @@
-.yellow1{
-	background-color: #FFE03A
-}
-.yellow2{
-	background-color: #FFD700
-}
-.yellow3{
-	background-color: #DDBB00
-}
-.yellow4{
-	background-color: #B39700
-}
-.yellow5{
-	background-color: #877200
-}
-.orange1{
-	background-color: #FF6A00
-}
 .green1{
 	background-color: #77EBA6
 }
@@ -33,4 +15,31 @@
 }
 .white{
 	background-color: #ffffff
+}
+.sidebar{
+	border-right: 3px solid rgba(0,0,0,.1);
+
+}
+textarea{
+	resize: none;
+}
+.column{
+	float: left;
+	width: 15%;
+	min-height: 100vh;
+}
+
+.left{
+	padding: 0px 0px 0px 30px;
+	width: 15%;
+}
+
+.right{
+	width: 85%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }

@@ -194,11 +194,12 @@ iframe {
 /*------------------------------------------------------------------
 [  ]*/
 .login100-pic {
-  width: 316px;
+  width: 356px;
+  padding: 40px 0px 0px 0px;
 }
 
 .login100-pic img {
-  max-width: 100%;
+  max-width: 110%;
 }
 
 
@@ -365,7 +366,7 @@ iframe {
   }
 
   .login100-pic {
-    width: 35%;
+    width: 40%;
   }
 
   .login100-form {
