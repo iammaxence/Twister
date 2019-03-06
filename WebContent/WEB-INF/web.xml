@@ -801,6 +801,26 @@ standard deployment descriptor.
     <servlet-name>ListMessage</servlet-name>
     <servlet-class> servlet.ListMessageServlet </servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>RemoveMessage</servlet-name>
+    <servlet-class> servlet.RemoveMessageServlet </servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddComment</servlet-name>
+    <servlet-class> servlet.AddCommentServlet </servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>RemoveComment</servlet-name>
+    <servlet-class> servlet.RemoveCommentServlet </servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddLike</servlet-name>
+    <servlet-class> servlet.AddLikeServlet </servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>RemoveLike</servlet-name>
+    <servlet-class> servlet.RemoveLikeServlet </servlet-class>
+  </servlet>
   
   
   <servlet-mapping>
@@ -830,5 +850,25 @@ standard deployment descriptor.
   <servlet-mapping>
     <servlet-name>ListMessage</servlet-name>
     <url-pattern> /message/listmessage </url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RemoveMessage</servlet-name>
+    <url-pattern> /message/removemessage </url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddComment</servlet-name>
+    <url-pattern> /message/addcomment </url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RemoveComment</servlet-name>
+    <url-pattern> /message/removecomment </url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddLike</servlet-name>
+    <url-pattern> /message/addlike </url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RemoveLike</servlet-name>
+    <url-pattern> /message/removelike </url-pattern>
   </servlet-mapping>
 </web-app>

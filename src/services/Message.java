@@ -1,6 +1,5 @@
 package services;
 
-
 import org.json.JSONObject;
 
 import tools.CheckTools;
@@ -25,21 +24,34 @@ public class Message {
 		return ReturnJSON.serviceAccepted();
 	}
 	
+	/**
+	 * Service pour lister les messages
+	 * @param key
+	 * @param query
+	 * @param friends
+	 * @return
+	 */
 	public static JSONObject listMessage(String key, String query ,String friends) {
 		if(!CheckTools.checkUserConnected(key))
 			return ReturnJSON.serviceRefused("USER DISCONNECTED", 701);
 		if(query!=null && friends==null)
-			return MessageTools.ListByQuery(key,query);
+			return MessageTools.listByQuery(key,query);
 		if(friends!=null && query==null)
-			return MessageTools.ListProfile(key,friends);
-		return MessageTools.ListAllMessage(key);
+			return MessageTools.listProfile(key,friends);
+		return MessageTools.listAllMessage(key);
 	}
 	
+	/**
+	 * Service pour enlever un message
+	 * @param key
+	 * @param id
+	 * @return
+	 */
 	public static JSONObject removeMessage(String key,int id) {
 		if(!CheckTools.checkUserConnected(key))
 			return ReturnJSON.serviceRefused("USER DISCONNECTED", 401);
 		
-		return MessageTools.RemoveMessage(id);
+		return MessageTools.removeMessage(id);
 	}
 
 	

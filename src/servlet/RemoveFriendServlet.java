@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import services.Friends;
-import services.User;
 
 /**
  * Servlet implementation class RemoveFriendServlet

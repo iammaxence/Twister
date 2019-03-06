@@ -11,13 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import services.Friends;
 import services.Message;
 
 /**
- * Servlet implementation class AddCommentServlet
+ * Servlet implementation class AddMessageServlet
  */
-@WebServlet("/AddCommentServlet")
+@WebServlet("/AddMessageServlet")
 public class AddMessageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

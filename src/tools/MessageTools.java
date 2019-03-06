@@ -69,7 +69,7 @@ public class MessageTools {
 			}
 		}*/
 
-	public static JSONObject ListAllMessage(String key) {
+	public static JSONObject listAllMessage(String key) {
 		try {
 						
 			Class.forName("com.mysql.jdbc.Driver");
@@ -129,7 +129,7 @@ public class MessageTools {
 		}
 	}
 
-	public static JSONObject ListProfile(String key, String friends) {
+	public static JSONObject listProfile(String key, String friends) {
 		try {
 			
 			if(!CheckTools.checkUserConnected(key))
@@ -163,12 +163,12 @@ public class MessageTools {
 		}
 	}
 
-	public static JSONObject ListByQuery(String key, String query) {
+	public static JSONObject listByQuery(String key, String query) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public static JSONObject RemoveMessage(int id) {
+	public static JSONObject removeMessage(int id) {
 		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
 		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
 		
@@ -180,5 +180,70 @@ public class MessageTools {
 		coll.deleteOne(d);
 		return ReturnJSON.serviceAccepted();
 		
+	}
+	
+	public static JSONObject addComment(String login,String id_message,String text) {
+		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
+		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
+		MongoCollection <Document> coll = mDB.getCollection("messages");
+		
+		Document doc=new Document().append("_id", id_message);
+		
+		Document comm=new Document();
+		comm.append("author", login);
+		comm.append("content", text);
+		comm.append("date", UserTools.getDate());
+			
+		Document add=new Document().append("$push", new Document().append("comments", comm));
+		coll.updateOne(doc, add);
+		return ReturnJSON.serviceAccepted();
+	}
+	
+	public static JSONObject removeComment(String login,String id_message,String id_comment) {
+		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
+		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
+		MongoCollection <Document> coll = mDB.getCollection("messages");
+		
+		Document search=new Document();
+		search.append("_id",id_message);
+		
+		Document comm=new Document();
+		comm.append("_id",id_comment);
+		
+		Document query=new Document();
+		query.append("$pull", new Document().append("comments", comm));
+		coll.updateOne(search,query);
+		
+		return ReturnJSON.serviceAccepted();
+	}
+	
+	public static JSONObject addLike(String login,String id_message) {
+		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
+		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
+		MongoCollection <Document> coll = mDB.getCollection("messages");
+		
+		Document doc=new Document().append("_id", id_message);
+		
+		Document like=new Document();
+		like.append("$push",new Document().append("like", login));
+			
+		
+		coll.updateOne(doc, like);
+		return ReturnJSON.serviceAccepted();
+	}
+	
+	public static JSONObject removeLike(String login,String id_message) {
+		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
+		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
+		MongoCollection <Document> coll = mDB.getCollection("messages");
+		
+		Document search=new Document();
+		search.append("_id",id_message);
+		
+		Document query=new Document();
+		query.append("$pull", new Document().append("like", login));
+		coll.updateOne(search,query);
+		
+		return ReturnJSON.serviceAccepted();
 	}
 }
