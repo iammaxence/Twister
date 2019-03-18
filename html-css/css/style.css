@@ -1,7 +1,9 @@
 body{
 	overflow-x: hidden;
 }
-
+.green0{
+	background-color: #A5F6C6
+}
 .green1{
 	background-color: #77EBA6
 }
@@ -50,4 +52,34 @@ textarea{
   content: "";
   display: table;
   clear: both;
+}
+
+.tw_back {
+	border-radius: 15px;
+	border: 2px solid #608273;
+}
+
+@font-face {
+  font-family: Poppins-Regular;
+  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+}
+
+@font-face {
+  font-family: Montserrat-Bold;
+  src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
+}
+
+body, html {
+	height: 100%;
+	font-family: Poppins-Regular, sans-serif;
 }
