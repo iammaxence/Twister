@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 //import './Liste_msg.css';
 
 class Liste_ami extends Component{

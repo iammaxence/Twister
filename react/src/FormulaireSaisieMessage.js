@@ -8,19 +8,23 @@ class FormulaireSaisieMessage extends Component {
   }
 
  send(){
-   this.props.log();//FAIRE SET STATE SUR LA LISTE DES MESSAGES
+   this.props.login();//FAIRE SET STATE SUR LA LISTE DES MESSAGES
   }
   
  render(){
-     var tab;
-     if(true)//liste message non vide
-       tab="Voici les messages";
-     return (<div className="FormulaireSaisieMessage"> <br/>
-         <label htmlFor="SaisieMessage">Twist : </label>
-              <input type="text" id="SaisieMessage" />
-              <input type="submit" value="twister" onClick={((event)=>this.send())} />
-         <p>{tab}</p>
-            </div>);
+  return(
+    <div class="m-auto">
+      <br/>
+        <form>
+          <div class="form-inline">
+            <fieldset>
+              <textarea class="form-control" id="" rows="4" cols="60" placeholder="Let's twist again"></textarea>
+              <input class="btn green2" type="submit" value="Twist" onClick={((event)=>this.send())} />
+            </fieldset>
+          </div>
+        </form>
+    </div>
+    );
    }
   
 }

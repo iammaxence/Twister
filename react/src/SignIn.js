@@ -14,11 +14,15 @@ class SignIn extends Component {
   cancel(){
     this.props.logout();
   }
-   render(){
+  register(){
+
+  }
+   
+  render(){
     return (
-        <div class="limiter">
-          <div class="container-login100">
-            <div class="wrap-login100">
+        <div class="limiter ">
+          <div class="container-login100 ">
+            <div class="wrap-login100 justify-content-center">
               <form class="login100-form validate-form">
                 <span class="login100-form-title">
                   Create Account
@@ -55,8 +59,8 @@ class SignIn extends Component {
                 </div>
                 
                 <div class="container-login100-form-btn">
-                  <input class="login100-form-btn" type="submit" value="Register" onClick={((event)=>this.register())} />
-                  <input class="login100-form-btn" type="submit" value="cancel" onClick={((event)=>this.cancel())} />
+                  <input class="login100-form-btn w-50" type="submit" value="Register" onClick={((event)=>this.register())} />
+                  <input class="login100-form-btn w-50" type="button" value="cancel" onClick={((event)=>this.cancel())} />
                 </div>
               </form>
             </div>
