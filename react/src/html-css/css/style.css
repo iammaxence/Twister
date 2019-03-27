@@ -91,4 +91,6 @@ body, html {
 .110{
 	width:110px;
 }
-
+.msgwrap{
+    overflow-wrap:break-word;
+}

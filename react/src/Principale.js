@@ -31,7 +31,6 @@ class Principale extends Component {
 						<br/>
 					</div>
 
-
 					<Liste_msg/>
 					
 				</div>
