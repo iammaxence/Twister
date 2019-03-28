@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import './Liste_msg.css';
+import Ami from './Ami.js';
 
 class Liste_ami extends Component{
 	constructor(props){
@@ -15,17 +15,5 @@ class Liste_ami extends Component{
 	}
 }
 
-class Ami extends Component{
-	constructor(props){
-		super(props);
-		this.state={ami:this.props.ami};
-	}
-
-	render() {
-		return (
-			<div className="Ami"> {this.state.ami} </div>
-		);
-	}
-}
 
 export default Liste_ami;
