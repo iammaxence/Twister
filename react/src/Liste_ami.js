@@ -8,9 +8,12 @@ class Liste_ami extends Component{
 	}
 	render() {
 		return (
-			this.state.liste.map(amis => {
-				return <Ami ami={amis.ami}/>;
-			})
+			<div>
+				<h4><i>Liste des amis:</i></h4>
+				{this.state.liste.map(amis => {
+					return <Ami ami={amis.ami}/>;
+				})}
+			</div>
 		);
 	}
 }

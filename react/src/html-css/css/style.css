@@ -30,8 +30,8 @@ body{
 
 }
 .botbar{
-	border-bottom: 3px solid rgba(0,0,0,0.5);
-	width: 86vw;
+	border-bottom: 2px solid rgba(0,0,0,0.5);
+	width: 99%;
 }
 textarea{
 	resize: none;

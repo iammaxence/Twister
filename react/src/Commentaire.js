@@ -8,7 +8,7 @@ class Commentaire extends Component{
 
 	render() {
 		return (
-			<div className="Commentaire" class="example-collapse-text">
+			<div className="Commentaire" class="example-collapse-text pt-1">
 				<li class="media tw_back">
 					<div class="media-body pl-2">
 						<div class="media">
@@ -19,7 +19,7 @@ class Commentaire extends Component{
 						</div>
 					</div>
 				</li>
-				<br/>
+				
 			</div>
 		);
 	}
