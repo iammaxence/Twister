@@ -23,35 +23,35 @@ class NavBar extends Component{
   
   render(){
       return(
-        <div class="container-fullwidth" className="NavBar">
+        <div className="container-fullwidth NavBar">
           <header>
-            <nav class="navbar navbar-expand-sm navbar-dark green1 navbar-fixed-top">
-              <div class="navbar-collapse collapse w-100 order-1 order-md-0">
-                <ul class="navbar-nav mr-auto">
-                  <div class="">
+            <nav className="navbar navbar-expand-sm navbar-dark green1 navbar-fixed-top">
+              <div className="navbar-collapse collapse w-100 order-1 order-md-0">
+                <ul className="navbar-nav mr-auto">
+                  <div className="">
                     <input type="image" width="50px" alt="Logo" src={logo} onClick={((event)=>this.principale())}/>
                   </div>
                 </ul>
               </div>
 
-              <div class="navbar-collapse collapse w-100 justify-content-center">       
-                <form class="form-inline">
-                  <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" required/>
-                  <input class="btn white" type="button" value="Search" onClick={((event)=>this.search(document.getElementById("search").value))}/>
+              <div className="navbar-collapse collapse w-100 justify-content-center">       
+                <form className="form-inline">
+                  <input className="form-control mr-sm-2" id="search" type="text" placeholder="Search" required/>
+                  <input className="btn white" type="button" value="Search" onClick={((event)=>this.search(document.getElementById("search").value))}/>
                 </form>
               </div>
 
-              <div class="navbar-collapse collapse w-100 order-3">
-                <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                    <div class="nav-link">
-                      <input class="btn brown1" type="button" value="Profil" onClick={((event)=>this.profil())}/>
+              <div className="navbar-collapse collapse w-100 order-3">
+                <ul className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    <div className="nav-link">
+                      <input className="btn brown1" type="button" value="Profil" onClick={((event)=>this.profil())}/>
                     </div>
                   </li>
 
-                  <li class="nav-item">
-                    <div class="nav-link" >  
-                      <input class="btn brown1" type="button" value="Deconnexion" onClick={((event)=>this.deconnexion())}/>
+                  <li className="nav-item">
+                    <div className="nav-link" >  
+                      <input className="btn brown1" type="button" value="Deconnexion" onClick={((event)=>this.deconnexion())}/>
                     </div>
                   </li>
                 </ul>

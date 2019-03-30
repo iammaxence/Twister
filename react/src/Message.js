@@ -17,6 +17,9 @@ class Message extends Component{
 	getCom(){
 		this.setState({buttonCom: !this.state.buttonCom});
 	}
+	GoProfil(ami){
+		this.props.profil(ami);
+	}
 
 	render() {
 		let modalClose = () => this.setState({ buttonLike: false });
@@ -28,16 +31,16 @@ class Message extends Component{
 
 		return (
 			<div className="Message">
-				<li class="media tw_back">
-					<div class="media-body pl-2">
-						<div class="media">
-							<div class="media-body">
-								<h4 class="media-heading ">{this.state.autor} <small class="float-right pr-2 pt-1"><i>{this.state.date}</i></small></h4>
+				<li className="media tw_back">
+					<div className="media-body pl-2">
+						<div className="media">
+							<div className="media-body">
+								<h4 className="media-heading "> <input type="button" className="btn pseudo pl-1" onClick={() => this.GoProfil(this.state.autor)} value={this.state.autor}/> <small className="float-right pr-2 pt-2"><i>{this.state.date}</i></small></h4>
 								<p>{this.state.message}</p>
-							    <div class="float-left">
+							    <div className="float-left">
 							        
 							        <ButtonToolbar>
-								        <input type="button" class="btn btn-outline-success" onClick={() => this.setState({ buttonLike: true })} value={this.state.listeLike.length}/>
+								        <input type="button" className="btn btn-outline-success" onClick={() => this.setState({ buttonLike: true })} value={this.state.listeLike.length}/>
 								        <Modal size="sg" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.buttonLike} onHide={modalClose} listeLike={this.props.listeLike}>
 								        	<Modal.Header closeButton>
 								        		<Modal.Title id="contained-modal-title-vcenter">
@@ -55,10 +58,10 @@ class Message extends Component{
 								        </Modal>
 								    </ButtonToolbar>
 							    </div>
-							    <div class="float-right pr-2 pb-1">
-							        <input type="button" class="btn btn-outline-success" onClick={((event)=>this.getCom())} aria-controls="example-collapse-text" aria-expanded={this.state.buttonCom} value="+"/>
+							    <div className="float-right pr-2 pb-1">
+							        <input type="button" className="btn btn-outline-success" onClick={((event)=>this.getCom())} aria-controls="example-collapse-text" aria-expanded={this.state.buttonCom} value="+"/>
 							    </div>
-								<div class="pt-5" >
+								<div className="pt-5" >
 									<Collapse in={this.state.buttonCom}>
 							          <div id="example-collapse-text">
 							            {comm}

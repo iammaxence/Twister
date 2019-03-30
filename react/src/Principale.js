@@ -13,17 +13,17 @@ class Principale extends Component {
     	return (
      		<div className="Principale">
      			<NavBar logout={this.props.logout} principale={this.props.principale} profil={this.props.profil} user={this.props.user}/>
-	     		<div class="row">
-					<div class="column left green0">
+	     		<div className="row">
+					<div className="column left green0">
 						<Liste_ami liste_ami={this.props.liste_ami} profil={this.props.profil} owner={this.props.owner} user={this.props.user}/>
 					</div>
-					<div class="column right">
-						<div class="row">
+					<div className="column right">
+						<div className="row">
 							<FormulaireSaisieMessage login={this.props.login} /> 
-							<div class="container-fluid">
+							<div className="container-fluid">
 								<br/>
 							</div>
-							<Liste_msg liste_msg={this.props.liste_msg}/>
+							<Liste_msg liste_msg={this.props.liste_msg} profil={this.props.profil} owner={this.props.owner} user={this.props.user}/>
 						</div>
 					</div>
 				</div>

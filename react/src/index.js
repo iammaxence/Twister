@@ -1,10 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import './index.css';
-
-import App from './App';
-import Liste_msg from './Liste_msg';
-import Liste_ami from './Liste_ami';
 import MainPage from './MainPage';
 import * as serviceWorker from './serviceWorker';
 

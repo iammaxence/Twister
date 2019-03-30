@@ -122,3 +122,9 @@ body, html {
 .line-h{
 	line-height: 1;
 }
+
+.pseudo{
+	font-size: 1.5rem;
+	line-height: 1;
+	text-align: right;
+}

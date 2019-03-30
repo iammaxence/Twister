@@ -28,27 +28,27 @@ class Profil extends Component{
 	    return (
 	     	<div className="Profil">
 	     		<NavBar logout={this.props.logout} principale={this.props.principale} profil={this.props.profil} user={this.props.user}/>
-	     		<div class="row">
-					<div class="column left green0">
+	     		<div className="row">
+					<div className="column left green0">
 						<Liste_ami liste_ami={this.props.liste_ami} profil={this.props.profil} owner={this.props.owner} user={this.props.user}/>
 					</div>
-					<div class="column right">
+					<div className="column right">
 						<br/>
-						<div class="flex-wrap">
-							<div class="container">
-								<div class="col-md-8 offset-md-2">
-									<div class="card card-header">
+						<div className="flex-wrap">
+							<div className="container">
+								<div className="col-md-8 offset-md-2">
+									<div className="card card-header">
 										<h1>{profilpage}</h1>
 										<h3>bio</h3>
-					                    <div class=""><input class="btn float-right" type="submit" value="Follow" onClick={((event)=>this.follow())} /></div>
-					                    <div class="row">
-					                    	<div class="col-md-4">
+					                    <div className=""><input className="btn green1 float-right" type="submit" value="Follow" onClick={((event)=>this.follow())} /></div>
+					                    <div className="row">
+					                    	<div className="col-md-4">
 					                    		<b>44</b> twists
 					                    	</div>
-					                    	<div class="col-md-4">
+					                    	<div className="col-md-4">
 					                    		<b>743</b> following
 					                    	</div>
-					                    	<div class="col-md-4">
+					                    	<div className="col-md-4">
 					                    		<b>345</b> followers
 					                    	</div>
 					                    </div>
@@ -60,7 +60,7 @@ class Profil extends Component{
 							{owner}
 						</div>
 						<br/>
-						<Liste_msg liste_msg={this.props.liste_msg}/>
+						<Liste_msg liste_msg={this.props.liste_msg} profil={this.props.profil} owner={this.props.owner} user={this.props.user}/>
 					</div>
 				</div>
 	       </div>);

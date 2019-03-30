@@ -16,43 +16,43 @@ class Login extends Component {
    
    render(){
      return (
-        <div className="Login" class="limiter">
-          <div class="container-login100">
-            <div class="wrap-login100">
-              <div class="login100-pic js-tilt" data-tilt>
+        <div className="Login" className="limiter">
+          <div className="container-login100">
+            <div className="wrap-login100">
+              <div className="login100-pic js-tilt" data-tilt>
                 <img src={logo} alt="Twister"/>
               </div>
 
-              <form class="login100-form validate-form">
-                <span class="login100-form-title">
+              <form className="login100-form validate-form">
+                <span className="login100-form-title">
                   Member Login
                 </span>
 
-                <div class="wrap-input100 validate-input">
-                  <input class="input100" type="text" name="email" placeholder="Email"/>
-                  <span class="focus-input100"></span>
+                <div className="wrap-input100 validate-input">
+                  <input className="input100" type="text" name="email" placeholder="Email"/>
+                  <span className="focus-input100"></span>
                 </div>
 
-                <div class="wrap-input100 validate-input">
-                  <input class="input100" type="password" name="pass" placeholder="Password"/>
-                  <span class="focus-input100"></span>
+                <div className="wrap-input100 validate-input">
+                  <input className="input100" type="password" name="pass" placeholder="Password"/>
+                  <span className="focus-input100"></span>
                 </div>
                 
-                <div class="container-login100-form-btn">
+                <div className="container-login100-form-btn">
                   
-                  <input  class="login100-form-btn" type="submit" value="Login" onClick={((event)=>this.send())} />
+                  <input  className="login100-form-btn" type="submit" value="Login" onClick={((event)=>this.send())} />
                 </div>
 
-                <div class="text-center p-t-12">
-                  <span class="txt1">
+                <div className="text-center p-t-12">
+                  <span className="txt1">
                     Forgot your
                   </span>
-                  <input class="white txt1 " type="submit" value=" password ?" onClick={((event)=>this.props.lost())}/>
+                  <input className="white txt1 " type="submit" value=" password ?" onClick={((event)=>this.props.lost())}/>
                 </div>
 
-                <div class="text-center p-t-136">
-                  <div class="txt2">
-                    <input class="white" type="submit" value="Create your Account" onClick={((event)=>this.props.register())}/>
+                <div className="text-center p-t-136">
+                  <div className="txt2">
+                    <input className="white" type="submit" value="Create your Account" onClick={((event)=>this.props.register())}/>
                   </div>
                 </div>
               </form>

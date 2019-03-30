@@ -15,11 +15,11 @@ class Liste_msg extends Component{
 	}
 	render() {
 		return (
-			<div class="container"> 
-				<div class="row">
-					<ul class="list-unstyled w-50 mx-auto">	  
+			<div className="container"> 
+				<div className="row">
+					<ul className="list-unstyled w-50 mx-auto">	  
 						{this.state.liste.map(messages => {
-							return <Message message={messages.message} autor={messages.autor} date={messages.date} listeCom={messages.listeCom} listeLike={messages.listeLike}/>;
+							return <Message message={messages.message} autor={messages.autor} date={messages.date} listeCom={messages.listeCom} listeLike={messages.listeLike} profil={this.props.profil} owner={this.props.owner} user={this.props.user}/>;
 							})}
 						<p></p>
 					</ul>
