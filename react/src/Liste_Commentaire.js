@@ -21,9 +21,9 @@ class Liste_Commentaire extends Component{
 						})}
 					</ul>
 					
-					<div class="form-inline pt-1 ">
-		                <textarea class="form-control" placeholder="Commentaire"></textarea>
-		                <input class="btn green1 " type="submit" value="Comment" onClick={((event)=>this.send())} />
+					<div class="form-inline pt-1 w-100">
+		                <textarea class="form-control w-75"  placeholder="Commentaire" required></textarea>
+		                <input class="btn green2" type="submit" value="Send" onClick={((event)=>this.send())} />
 		            </div>
 				</div>
 				<div class="pt-1" ></div>

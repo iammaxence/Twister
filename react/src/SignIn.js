@@ -44,7 +44,7 @@ class SignIn extends Component {
                 </div>
 
                 <div class="wrap-input100 validate-input" >
-                  <input class="input100" type="text" name="email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Must be an email" required />
+                  <input class="input100" type="mail" name="email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Must be an email" required />
                   <span class="focus-input100"></span>
                 </div>
 

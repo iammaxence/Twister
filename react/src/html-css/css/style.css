@@ -94,3 +94,31 @@ body, html {
 .msgwrap{
     overflow-wrap:break-word;
 }
+
+@media (min-width: 576px) {
+	.textarea-resp{
+		width: 55em;
+	}
+}
+@media (min-width: 768px) {
+	.textarea-resp{
+		width: 55em;
+	}
+}
+@media (min-width: 992px) {
+	.textarea-resp{
+		width: 55em;
+	}
+}
+@media (min-width: 1200px) {
+	.textarea-resp{
+		width: 55em;
+	}
+}
+.w-85 {
+  width: 85% !important;
+}
+
+.line-h{
+	line-height: 1;
+}

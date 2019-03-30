@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import logo from './html-css/images/Twister.png';
+import logo from './html-css/images/Logo_White.png';
 import './html-css/css/bootstrap.min.css';
 import './html-css/css/style.css';
-import Logout from './Logout.js';
 
 class NavBar extends Component{
   constructor(props){
@@ -12,33 +11,32 @@ class NavBar extends Component{
     alert(requete);
   }
   profil(){
-
+    this.props.profil("me");
   }
   deconnexion(){
     this.props.logout();
   }
 
-  principal(){
-
+  principale(){
+    this.props.principale();
   }
   
   render(){
-    //A L'ATTENTION DE MAXENCE LA DIV 110 ET LE WIDTH PERMET DAVOIR LA BONNE TAILLE DU LOGO
       return(
         <div class="container-fullwidth" className="NavBar">
           <header>
             <nav class="navbar navbar-expand-sm navbar-dark green1 navbar-fixed-top">
               <div class="navbar-collapse collapse w-100 order-1 order-md-0">
                 <ul class="navbar-nav mr-auto">
-                  <div class="110">
-                    <input type="image" width="110px" src={logo} onClick={((event)=>this.principal())}/>
+                  <div class="">
+                    <input type="image" width="50px" alt="Logo" src={logo} onClick={((event)=>this.principale())}/>
                   </div>
                 </ul>
               </div>
 
               <div class="navbar-collapse collapse w-100 justify-content-center">       
-                <form class="form-inline" action="">
-                  <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search"/>
+                <form class="form-inline">
+                  <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" required/>
                   <input class="btn white" type="button" value="Search" onClick={((event)=>this.search(document.getElementById("search").value))}/>
                 </form>
               </div>

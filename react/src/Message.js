@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Collapse from 'react-bootstrap/Collapse';
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import './html-css/css/bootstrap.min.css';
 import './html-css/css/style.css';
@@ -24,7 +23,7 @@ class Message extends Component{
 		var comm;
 
 		if (this.state.buttonCom === true){
-			comm=<Liste_Commentaire listeCom={this.props.listeCom}/>
+			comm=<Liste_Commentaire listeCom={this.props.listeCom}/>;
 		}
 
 		return (
@@ -35,7 +34,6 @@ class Message extends Component{
 							<div class="media-body">
 								<h4 class="media-heading ">{this.state.autor} <small class="float-right pr-2 pt-1"><i>{this.state.date}</i></small></h4>
 								<p>{this.state.message}</p>
-								
 							    <div class="float-left">
 							        
 							        <ButtonToolbar>
