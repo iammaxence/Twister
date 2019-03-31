@@ -30,6 +30,7 @@ class Profil extends Component{
 	     		<NavBar logout={this.props.logout} principale={this.props.principale} profil={this.props.profil} user={this.props.user}/>
 	     		<div className="row">
 					<div className="column left green0">
+						<br/>
 						<Liste_ami liste_ami={this.props.liste_ami} profil={this.props.profil} owner={this.props.owner} user={this.props.user}/>
 					</div>
 					<div className="column right">

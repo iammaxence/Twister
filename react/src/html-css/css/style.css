@@ -42,7 +42,7 @@ textarea{
 }
 
 .left{
-	padding: 0px 0px 0px 30px;
+	padding: 0px 0px 0px 20px;
 	width: 15%;
 }
 
@@ -117,6 +117,9 @@ body, html {
 }
 .w-85 {
   width: 85% !important;
+}
+.w-15{
+	width: 15% !important;
 }
 
 .line-h{
