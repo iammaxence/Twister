@@ -5,9 +5,7 @@ import Liste_msg from './Liste_msg';
 import Liste_ami from './Liste_ami';
 
 class Profil extends Component{
-	constructor(props){
-		super(props);
-	}
+	
 	follow(){
 
 	}

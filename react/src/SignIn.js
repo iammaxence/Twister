@@ -5,9 +5,7 @@ import './html-css/css/util.css';
 import './html-css/css/enregistrement.css';
 
 class SignIn extends Component {
-  constructor(props){
-     super(props);
-   }
+  
   send(){
     this.props.register();
   }

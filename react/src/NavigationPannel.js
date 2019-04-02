@@ -5,9 +5,6 @@ import Login from './Login';
 import Profil from './Profil';
 
 class NavigationPannel extends Component{
-  constructor(props){
-    super(props);
-  }
   
   render(){
     var temp;

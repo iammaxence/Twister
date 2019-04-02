@@ -4,9 +4,7 @@ import './html-css/css/bootstrap.min.css';
 import './html-css/css/style.css';
 
 class NavBar extends Component{
-  constructor(props){
-    super(props);
-  }
+  
   search(requete){
     alert(requete);
   }
