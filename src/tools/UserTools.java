@@ -33,10 +33,10 @@ public class UserTools {
 			return tools.ReturnJSON.serviceAccepted();
 		}
 		catch (SQLException s) {
-			return tools.ReturnJSON.serviceRefused("Failed creating user DB",104);
+			return tools.ReturnJSON.serviceRefused("Failed creating user DB",110);
 		}
 		catch (ClassNotFoundException c ) {
-			return tools.ReturnJSON.serviceRefused("Failed creating user Class",105);
+			return tools.ReturnJSON.serviceRefused("Failed creating user Class",120);
 		}
 	}
 	

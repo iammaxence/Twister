@@ -12,13 +12,14 @@ public class Comments {
 	
 	/**
 	 * Service permettant de poster un commentaire
-	 * @param key
+	 * @param login
+	 * @param id_message
 	 * @param text
 	 * @return
 	 */
 	public static JSONObject postComment(String login,String id_message,String text) {
 		if(!CheckTools.alreadyConnected(new StringBuilder(login)))
-			return ReturnJSON.serviceRefused("USER DISCONNECTED", 401);
+			return ReturnJSON.serviceRefused("USER DISCONNECTED", 801);
 		
 		tools.MessageTools.addComment(login, id_message, text);
 		return ReturnJSON.serviceAccepted();
@@ -33,7 +34,7 @@ public class Comments {
 	 */
 	public static JSONObject removeComment(String login,String id_message,String id_comment) {
 		if(!CheckTools.alreadyConnected(new StringBuilder(login)))
-			return ReturnJSON.serviceRefused("USER DISCONNECTED", 401);
+			return ReturnJSON.serviceRefused("USER DISCONNECTED", 802);
 		
 		return MessageTools.removeComment(login, id_message, id_comment);
 	}

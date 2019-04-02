@@ -10,7 +10,7 @@ public class Likes {
 	
 	public static JSONObject addLike(String login,String id_message) {
 		if(!CheckTools.alreadyConnected(new StringBuilder(login)))
-			return ReturnJSON.serviceRefused("USER DISCONNECTED", 401);
+			return ReturnJSON.serviceRefused("USER DISCONNECTED", 901);
 		
 		tools.MessageTools.addLike(login, id_message);
 		return ReturnJSON.serviceAccepted();
@@ -18,7 +18,7 @@ public class Likes {
 	
 	public static JSONObject removeLike(String login,String id_message) {
 		if(!CheckTools.alreadyConnected(new StringBuilder(login)))
-			return ReturnJSON.serviceRefused("USER DISCONNECTED", 401);
+			return ReturnJSON.serviceRefused("USER DISCONNECTED", 902);
 		
 		tools.MessageTools.removeLike(login, id_message);
 		return ReturnJSON.serviceAccepted();

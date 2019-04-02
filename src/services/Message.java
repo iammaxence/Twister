@@ -49,7 +49,7 @@ public class Message {
 	 */
 	public static JSONObject removeMessage(String key,int id) {
 		if(!CheckTools.checkUserConnected(key))
-			return ReturnJSON.serviceRefused("USER DISCONNECTED", 401);
+			return ReturnJSON.serviceRefused("USER DISCONNECTED", 402);
 		
 		return MessageTools.removeMessage(id);
 	}
