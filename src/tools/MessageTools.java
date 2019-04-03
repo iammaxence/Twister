@@ -1,7 +1,6 @@
 package tools;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,23 +11,14 @@ import org.bson.Document;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
-
-
-
 
 public class MessageTools {
-	//private static int cpt=0;
 	
 	public static void postMessage(String key, String text) {
-		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
-		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
 		
-		MongoCollection <Document> coll = mDB.getCollection("messages");
+		MongoCollection <Document> coll = Database.getMongocollection("messages");
 		Document d=new Document();
 		d.append("message", text);
 		d.append("key", key);
@@ -37,15 +27,8 @@ public class MessageTools {
 		d.append("date",UserTools.getDate());
 		
 		coll.insertOne(d);
-		/*
-		Document doc=new Document();
-		doc.append("key", key);
-		MongoCursor<Document> list=coll.find(doc).iterator();
-		while(list.hasNext()) {
-			Document o=list.next();
-			//System.out.println(o);
-		}*/
 	}
+	
 	/*public static void postMessage(String key, String text) {
 		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
 		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
@@ -72,9 +55,8 @@ public class MessageTools {
 	public static JSONObject listAllMessage(String key) {
 		try {
 						
-			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost/Brunet_Lin";
-			Connection conn= DriverManager.getConnection(url,"root","root");
+			
+			Connection conn= Database.getMySQLConnection();
 			String login=UserTools.getLoginUser(key);//login de l'utilisateur
 			
 			String query="SELECT * FROM friends WHERE friends.log_user='"+login+"'";
@@ -95,10 +77,7 @@ public class MessageTools {
 			st.close();
 			conn.close();
 			
-			MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
-			MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
-			
-			MongoCollection <Document> coll = mDB.getCollection("messages");
+			MongoCollection <Document> coll = Database.getMongocollection("messages");
 			//recupere la liste des amis de mongodb
 			Document doc=new Document();
 			doc.append("login",new Document("$in",list_ami));
@@ -121,11 +100,9 @@ public class MessageTools {
 			
 		}
 		catch (SQLException e1) {
-			return ReturnJSON.serviceRefused("SQL ERROR", 710);
-		} catch (ClassNotFoundException e) {
-			return ReturnJSON.serviceRefused("Class not found", 720);
+			return ReturnJSON.serviceRefused("SQL ERROR", 110);
 		} catch (JSONException e) {
-			return ReturnJSON.serviceRefused("JSON Exception", 730);
+			return ReturnJSON.serviceRefused("JSON ERROR", 120);
 		}
 	}
 
@@ -135,10 +112,7 @@ public class MessageTools {
 			if(!CheckTools.checkUserConnected(key))
 				return ReturnJSON.serviceRefused("Not connected", 0);
 			
-			MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
-			MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
-			
-			MongoCollection <Document> coll = mDB.getCollection("messages");
+			MongoCollection <Document> coll = Database.getMongocollection("messages");
 			//recupere la liste des amis de mongodb
 			Document doc=new Document();
 			doc.append("login",friends);
@@ -159,7 +133,7 @@ public class MessageTools {
 			return res;
 			
 		} catch (JSONException e) {
-			return ReturnJSON.serviceRefused("SQL ERROR", 710);
+			return ReturnJSON.serviceRefused("SQL ERROR", 110);
 		}
 	}
 
@@ -169,10 +143,7 @@ public class MessageTools {
 	}
 
 	public static JSONObject removeMessage(int id) {
-		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
-		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
-		
-		MongoCollection <Document> coll = mDB.getCollection("messages");
+		MongoCollection <Document> coll = Database.getMongocollection("messages");
 		
 		Document d=new Document();
 		d.append("_id", id);
@@ -183,9 +154,7 @@ public class MessageTools {
 	}
 	
 	public static JSONObject addComment(String login,String id_message,String text) {
-		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
-		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
-		MongoCollection <Document> coll = mDB.getCollection("messages");
+		MongoCollection <Document> coll = Database.getMongocollection("messages");
 		
 		Document doc=new Document().append("_id", id_message);
 		
@@ -200,9 +169,7 @@ public class MessageTools {
 	}
 	
 	public static JSONObject removeComment(String login,String id_message,String id_comment) {
-		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
-		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
-		MongoCollection <Document> coll = mDB.getCollection("messages");
+		MongoCollection <Document> coll = Database.getMongocollection("messages");
 		
 		Document search=new Document();
 		search.append("_id",id_message);
@@ -218,9 +185,7 @@ public class MessageTools {
 	}
 	
 	public static JSONObject addLike(String login,String id_message) {
-		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
-		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
-		MongoCollection <Document> coll = mDB.getCollection("messages");
+		MongoCollection <Document> coll = Database.getMongocollection("messages");
 		
 		Document doc=new Document().append("_id", id_message);
 		
@@ -233,9 +198,7 @@ public class MessageTools {
 	}
 	
 	public static JSONObject removeLike(String login,String id_message) {
-		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
-		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
-		MongoCollection <Document> coll = mDB.getCollection("messages");
+		MongoCollection <Document> coll = Database.getMongocollection("messages");
 		
 		Document search=new Document();
 		search.append("_id",id_message);

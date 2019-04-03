@@ -1,7 +1,6 @@
 package tools;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,10 +18,7 @@ public class CheckTools {
 	public static boolean checkUserConnected(String key) {
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost/Brunet_Lin";
-			Connection conn= DriverManager.getConnection(url,"root","root");
-			
+			Connection conn= Database.getMySQLConnection();
 			String query="SELECT * FROM session WHERE session.key_user='"+key+"'";
 			//System.out.println(query);
 			
@@ -48,11 +44,7 @@ public class CheckTools {
 			return false;
 		}
 		catch (SQLException s) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 110));
-			return false;
-		}
-		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 120));
+			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 110));
 			return false;
 		}
 		
@@ -90,10 +82,7 @@ public class CheckTools {
 		try {
 			
 			boolean res=false;
-		
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			String url="jdbc:mysql://localhost/Brunet_Lin";
-			Connection conn= DriverManager.getConnection(url,"root","root");
+			Connection conn= Database.getMySQLConnection();
 			String query="SELECT * FROM user WHERE user.login='"+login+"' AND user.password='"+psswd+"'";
 			
 			Statement st=conn.createStatement();
@@ -107,18 +96,7 @@ public class CheckTools {
 			return res;
 		}
 		catch (SQLException s) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 110));
-			return false;
-		}
-		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 120));
-			return false;
-		}
-		catch (IllegalAccessException i ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme illegal access", 130));
-			return false;
-		} catch (InstantiationException e) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme instantiation exception", 140));
+			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 110));
 			return false;
 		}
 	}
@@ -131,9 +109,7 @@ public class CheckTools {
 	public static boolean exist(String login) {
 		try {
 			Boolean res=false;
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			String url="jdbc:mysql://localhost/Brunet_Lin";
-			Connection conn= DriverManager.getConnection(url,"root","root");
+			Connection conn= Database.getMySQLConnection();
 			String query="SELECT * FROM user as u WHERE u.login='"+login+"'";
 			
 			Statement st=conn.createStatement();
@@ -147,18 +123,7 @@ public class CheckTools {
 			return res;
 		}
 		catch (SQLException s) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 110));
-			return false;
-		}
-		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 120));
-			return false;
-		}
-		catch (IllegalAccessException i ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme illegal access", 130));
-			return false;
-		} catch (InstantiationException e) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme instantiation exception", 140));
+			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 110));
 			return false;
 		}
 		
@@ -172,10 +137,7 @@ public class CheckTools {
 	public static boolean alreadyConnected(StringBuilder log) { //Verifie si user déjà connecté avec login
 		try {
 			
-			
-			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost/Brunet_Lin";
-			Connection conn= DriverManager.getConnection(url,"root","root");
+			Connection conn= Database.getMySQLConnection();
 			
 			String query="SELECT * FROM session WHERE session.login='"+log.toString()+"'";
 			//System.out.println(query);
@@ -194,11 +156,7 @@ public class CheckTools {
 		}
 		catch (SQLException s) {
 			System.out.println("herE"); // a enlever après test
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 110));
-			return false;
-		}
-		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 120));
+			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 110));
 			return false;
 		}
 		
@@ -214,9 +172,7 @@ public class CheckTools {
 	public static boolean isFriend(String key, String logFriend) {
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost/Brunet_Lin";
-			Connection conn= DriverManager.getConnection(url,"root","root");
+			Connection conn= Database.getMySQLConnection();
 			String loginUser=tools.UserTools.getLoginUser(key);
 			
 			//Requete
@@ -235,11 +191,7 @@ public class CheckTools {
 			
 		}
 		catch (SQLException s) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 110));
-			return false;
-		}
-		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 120));
+			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 110));
 			return false;
 		}
 	}

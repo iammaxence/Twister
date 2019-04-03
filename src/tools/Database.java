@@ -5,7 +5,13 @@ import java.sql.SQLException;
 
 import javax.naming.InitialContext; 
 import javax.naming.NamingException; 
-import javax.sql.DataSource; 
+import javax.sql.DataSource;
+
+import org.bson.Document;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 public class Database {
 	
@@ -37,6 +43,11 @@ public class Database {
 		} 
 		return(database.getConnection()); 
 		} 
+	}
+	public static MongoCollection <Document> getMongocollection(String table) {
+		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
+		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
+		return  mDB.getCollection(table);
 	}
 }
 

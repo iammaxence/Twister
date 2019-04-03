@@ -38,7 +38,7 @@ public class Auth {
 				js.put("Login", login);
 				js.put("Key", key);
 			} catch (JSONException e) {
-				return ReturnJSON.serviceRefused("JSON Error", 204);
+				return ReturnJSON.serviceRefused("JSON Error", 120);
 			}
 			return js;
 		}

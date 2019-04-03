@@ -1,7 +1,6 @@
 package tools;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -15,11 +14,8 @@ public class AuthTools {
 	 */
 	public static StringBuilder insertNvlleSession(StringBuilder log,int root) {
 		try {
-			
-			
-			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost/Brunet_Lin";
-			Connection conn= DriverManager.getConnection(url,"root","root");
+
+			Connection conn= Database.getMySQLConnection();
 			
 			if(tools.CheckTools.alreadyConnected(log)) //Si déjà connecter, je fais rien
 				return new StringBuilder();
@@ -36,11 +32,7 @@ public class AuthTools {
 			return alea;
 		}
 		catch (SQLException s) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 210));
-			return new StringBuilder();
-		}
-		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 220));
+			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 110));
 			return new StringBuilder();
 		}
 		
@@ -68,9 +60,7 @@ public class AuthTools {
 	 */
 	public static void deconnexion(String key) { 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost/Brunet_Lin";
-			Connection conn= DriverManager.getConnection(url,"root","root");
+			Connection conn= Database.getMySQLConnection();
 			
 			String query="DELETE FROM session WHERE session.key_user='"+key+"'"; //supprime la cle d'un user
 			//System.out.println(query);
@@ -81,10 +71,7 @@ public class AuthTools {
 			conn.close();
 		}
 		catch (SQLException s) {
-			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 310));
-		}
-		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("Class not found", 320));
+			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 110));
 		}
 		
 	}

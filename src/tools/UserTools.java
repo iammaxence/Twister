@@ -2,15 +2,11 @@ package tools;
 
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,9 +23,7 @@ public class UserTools {
 	 */
 	public static JSONObject insertUser(String nom, String prenom, String login, String psswd, String mail) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost/Brunet_Lin";
-			Connection conn= DriverManager.getConnection(url,"root","root");
+			Connection conn= Database.getMySQLConnection();
 			String query="INSERT INTO user VALUES ('"+login+"','"+psswd+"','"+prenom+"','"+nom+"','"+mail+"')";
 			//System.out.println(query);
 			Statement st=conn.createStatement();
@@ -41,10 +35,7 @@ public class UserTools {
 			return tools.ReturnJSON.serviceAccepted();
 		}
 		catch (SQLException s) {
-			return tools.ReturnJSON.serviceRefused("Failed creating user DB",110);
-		}
-		catch (ClassNotFoundException c ) {
-			return tools.ReturnJSON.serviceRefused("Failed creating user Class",120);
+			return tools.ReturnJSON.serviceRefused("SQL ERROR",110);
 		}
 	}
 	
@@ -55,9 +46,7 @@ public class UserTools {
 	 */
 	public static boolean connected(String key) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost/Brunet_Lin";
-			Connection conn= DriverManager.getConnection(url,"root","root");
+			Connection conn= Database.getMySQLConnection();
 			
 			String query="SELECT * FROM session WHERE session.key_user='"+key+"'";
 			//System.out.println(query);
@@ -76,11 +65,7 @@ public class UserTools {
 		}
 		catch (SQLException s) {
 			//System.out.println("herE"); // a enlever après test
-			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 210));
-			return false;
-		}
-		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("Class not found", 220));
+			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 110));
 			return false;
 		}
 	}
@@ -93,9 +78,7 @@ public class UserTools {
 	public static void AddFriend(String key, String logFriend) {
 
 		try {		
-			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost/Brunet_Lin";
-			Connection conn= DriverManager.getConnection(url,"root","root");
+			Connection conn= Database.getMySQLConnection();
 			String loginUser=tools.UserTools.getLoginUser(key);
 			
 	
@@ -117,12 +100,8 @@ public class UserTools {
 		}
 		catch (SQLException s) {
 			//System.out.println("ADDFRIENDERROR"); // a enlever après test
-			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 510));
+			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 110));
 			
-		}
-		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("Class not found", 520));
-		
 		}
 	}
 	/**
@@ -133,9 +112,7 @@ public class UserTools {
 	public static void RemoveFriend(String key, String logFriend) {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost/Brunet_Lin";
-			Connection conn= DriverManager.getConnection(url,"root","root");
+			Connection conn= Database.getMySQLConnection();
 			String loginUser=tools.UserTools.getLoginUser(key);
 			
 			//Requete
@@ -151,12 +128,8 @@ public class UserTools {
 		}
 		catch (SQLException s) {
 			//System.out.println("ADDFRIENDERROR"); // a enlever après test
-			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 610));
+			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 110));
 			
-		}
-		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("Class not found", 620));
-		
 		}
 	}
 	
@@ -181,9 +154,7 @@ public class UserTools {
 			
 			String res="";
 			
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			String url="jdbc:mysql://localhost/Brunet_Lin";
-			Connection conn= DriverManager.getConnection(url,"root","root");
+			Connection conn= Database.getMySQLConnection();
 			String query="SELECT * FROM session WHERE session.key_user='"+key+"'";
 			
 			Statement st=conn.createStatement();
@@ -197,18 +168,7 @@ public class UserTools {
 			return res;
 		}
 		catch (SQLException s) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 101));
-			return "";
-		}
-		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 102));
-			return "";
-		}
-		catch (IllegalAccessException i ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme illegal access", 106));
-			return "";
-		} catch (InstantiationException e) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme instantiation exception", 107));
+			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 110));
 			return "";
 		}
 		
@@ -218,9 +178,7 @@ public class UserTools {
 		try {
 			JSONObject res= new JSONObject();			
 			
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			String url="jdbc:mysql://localhost/Brunet_Lin";
-			Connection conn= DriverManager.getConnection(url,"root","root");
+			Connection conn= Database.getMySQLConnection();
 			String query="SELECT * FROM friends WHERE friends.log_user='"+log+"'";
 			Statement st=conn.createStatement();
 			ResultSet rs=st.executeQuery(query);
@@ -234,18 +192,10 @@ public class UserTools {
 			return res;
 		}
 		catch (SQLException s) {
-			return ReturnJSON.serviceRefused("probleme existance base de donnee", 1010);
+			return ReturnJSON.serviceRefused("SQL ERROR", 110);
 		}
-		catch (ClassNotFoundException c ) {
-			return ReturnJSON.serviceRefused("probleme class not found", 1020);
-		}
-		catch (IllegalAccessException i ) {
-			return ReturnJSON.serviceRefused("probleme illegal access", 1030);
-		} catch (InstantiationException e) {
-
-			return ReturnJSON.serviceRefused("probleme instantiation exception", 1040);
-		} catch (JSONException e) {
-			return ReturnJSON.serviceRefused("JSON Error", 1050);
+		catch (JSONException e) {
+			return ReturnJSON.serviceRefused("JSON ERROR", 120);
 		}
 		
 	}
