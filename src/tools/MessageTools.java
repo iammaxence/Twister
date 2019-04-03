@@ -159,7 +159,7 @@ public class MessageTools {
 			return res;
 			
 		} catch (JSONException e) {
-			return ReturnJSON.serviceRefused("SQL ERROR", 0);
+			return ReturnJSON.serviceRefused("SQL ERROR", 710);
 		}
 	}
 

@@ -107,18 +107,18 @@ public class CheckTools {
 			return res;
 		}
 		catch (SQLException s) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 101));
+			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 110));
 			return false;
 		}
 		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 102));
+			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 120));
 			return false;
 		}
 		catch (IllegalAccessException i ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme illegal access", 106));
+			System.out.println(tools.ReturnJSON.serviceRefused("probleme illegal access", 130));
 			return false;
 		} catch (InstantiationException e) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme instantiation exception", 107));
+			System.out.println(tools.ReturnJSON.serviceRefused("probleme instantiation exception", 140));
 			return false;
 		}
 	}
@@ -147,18 +147,18 @@ public class CheckTools {
 			return res;
 		}
 		catch (SQLException s) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 101));
+			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 110));
 			return false;
 		}
 		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 102));
+			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 120));
 			return false;
 		}
 		catch (IllegalAccessException i ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme illegal access", 106));
+			System.out.println(tools.ReturnJSON.serviceRefused("probleme illegal access", 130));
 			return false;
 		} catch (InstantiationException e) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme instantiation exception", 107));
+			System.out.println(tools.ReturnJSON.serviceRefused("probleme instantiation exception", 140));
 			return false;
 		}
 		
@@ -194,11 +194,11 @@ public class CheckTools {
 		}
 		catch (SQLException s) {
 			System.out.println("herE"); // a enlever après test
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 101));
+			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 110));
 			return false;
 		}
 		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 102));
+			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 120));
 			return false;
 		}
 		
@@ -235,11 +235,11 @@ public class CheckTools {
 			
 		}
 		catch (SQLException s) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 101));
+			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 110));
 			return false;
 		}
 		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 102));
+			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 120));
 			return false;
 		}
 	}

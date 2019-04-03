@@ -51,7 +51,7 @@ public class Auth {
 	 */
 	public static JSONObject deconnexion(String key) {
 		if(!tools.UserTools.connected(key))
-			return ReturnJSON.serviceRefused("User already disconnected", 601);
+			return ReturnJSON.serviceRefused("User already disconnected", 301);
 		tools.AuthTools.deconnexion(key);
 		return ReturnJSON.serviceAccepted();	
 	}

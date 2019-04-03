@@ -36,11 +36,11 @@ public class AuthTools {
 			return alea;
 		}
 		catch (SQLException s) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 101));
+			System.out.println(tools.ReturnJSON.serviceRefused("probleme existance base de donnee", 210));
 			return new StringBuilder();
 		}
 		catch (ClassNotFoundException c ) {
-			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 102));
+			System.out.println(tools.ReturnJSON.serviceRefused("probleme class not found", 220));
 			return new StringBuilder();
 		}
 		
