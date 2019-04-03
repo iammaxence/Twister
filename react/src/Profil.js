@@ -25,7 +25,7 @@ class Profil extends Component{
 
 	    return (
 	     	<div className="Profil">
-	     		<NavBar logout={this.props.logout} principale={this.props.principale} profil={this.props.profil} user={this.props.user}/>
+	     		<NavBar logout={this.props.logout} principale={this.props.principale} profil={this.props.profil} user={this.props.user} Ukey={this.props.Ukey}/>
 	     		<div className="row">
 					<div className="column left green0">
 						<br/>

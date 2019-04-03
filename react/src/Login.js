@@ -7,7 +7,40 @@ import './html-css/css/bootstrap.min.css';
 import axios from 'axios';
 
 class Login extends Component {
-   
+     getListAmi(user){
+      
+        const url= new URLSearchParams();
+        url.append("login",user);
+        alert("http://localhost:8080/Web/friends/list?"+url);
+        axios.get("http://localhost:8080/Web/friends/list?"+url).then(res=> this.respami(res));
+      
+    }
+     
+     respami(resp){
+      console.log(resp.data);
+      if(resp.data["code"]=== 1001){
+        alert(resp.data["message"]);
+      }
+      else if(resp.data["code"]=== 1010){
+        alert(resp.data["message"]);
+      }
+      else if(resp.data["code"]=== 1020){
+        alert(resp.data["message"]);
+      }
+      else if(resp.data["code"]=== 1030){
+        alert(resp.data["message"]);
+      }
+      else if(resp.data["code"]=== 1040){
+        alert(resp.data["message"]);
+      }
+      else if(resp.data["code"]=== 1050){
+        alert(resp.data["message"]);
+      }
+      else{
+        this.props.getListAmi(resp.data["friend"]);
+      }
+     
+    }
    
    send(){
      //this.props.login();
@@ -27,15 +60,34 @@ class Login extends Component {
    }
    
    resplogin(resp){
-    alert("blabla");
-    if(resp.data["Status"]==="error"){
-      this.setState({"Status":"error","texterror":resp.data["description"]})
+    console.log(resp.data);
+    if(resp.data["code"]=== 201){
+      //this.setState({"Status":"error","texterror":resp.data["description"]})
+      alert(resp.data["message"]);
+    }
+    else if(resp.data["code"]=== 202){
+      alert(resp.data["message"]);
+    }
+    else if(resp.data["code"]=== 203){
+      alert(resp.data["message"]);
+    }
+    else if(resp.data["code"]=== 204){
+      alert(resp.data["message"]);
+    }
+    else if(resp.data["code"]=== 210){
+      alert(resp.data["message"]);
+    }
+    else if(resp.data["code"]=== 220){
+      alert(resp.data["message"]);
     }
     else{
-      this.props.login();
+      this.props.login(resp.data["Login"],resp.data["Key"]);
+      this.getListAmi(resp.data["Login"]);
     }
    }
-   
+
+
+   //onKeyPress= {(e) => {if(e.key === 'Enter'){this.send()}}}
    
    render(){
      return (
@@ -57,13 +109,13 @@ class Login extends Component {
                 </div>
 
                 <div className="wrap-input100 validate-input">
-                  <input className="input100" type="password" ref="password" placeholder="Password"/>
+                  <input className="input100" type="password" ref="password" placeholder="Password" />
                   <span className="focus-input100"></span>
                 </div>
                 
                 <div className="container-login100-form-btn">
                   
-                  <input  className="login100-form-btn" type="button" value="Login" onClick={((event)=>this.send())} />
+                  <input  className="login100-form-btn" type="button" value="Login" onClick={((event)=>this.send())}  />
                 </div>
 
                 <div className="text-center p-t-12">

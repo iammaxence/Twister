@@ -821,6 +821,11 @@ standard deployment descriptor.
     <servlet-name>RemoveLike</servlet-name>
     <servlet-class> servlet.RemoveLikeServlet </servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ListFriend</servlet-name>
+    <servlet-class> servlet.ListFriendServlet </servlet-class>
+  </servlet>
+  
   
   
   <servlet-mapping>
@@ -871,6 +876,11 @@ standard deployment descriptor.
     <servlet-name>RemoveLike</servlet-name>
     <url-pattern> /message/removelike </url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ListFriend</servlet-name>
+    <url-pattern> /friends/list </url-pattern>
+  </servlet-mapping>
+  
   
  <filter>
     <filter-name>CorsFilter</filter-name>

@@ -58,4 +58,13 @@ public class Friends {
 		return ReturnJSON.serviceAccepted();
 		
 	}
+	
+	public static JSONObject listFriend(String log) {
+		
+		if(!CheckTools.alreadyConnected(new StringBuilder(log))) {
+			return ReturnJSON.serviceRefused("User not connected", 1001);
+		}
+		return tools.UserTools.listFriend(log);
+		
+	}
 }

@@ -14,7 +14,7 @@ class Liste_ami extends Component{
 			<div>
 				<h4><i>Liste des amis:</i></h4>
 				{this.state.liste.map(amis => {
-					return <input type="button" className="btn line-h" onClick={() => this.GoProfil(amis.ami)} value={amis.ami}/>;
+					return <input type="button" className="btn line-h" onClick={() => this.GoProfil(amis.friend)} value={amis.friend}/>;
 				})}
 			</div>
 		);

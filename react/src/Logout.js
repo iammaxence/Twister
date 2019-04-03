@@ -6,7 +6,8 @@ class Logout extends Component {
    }
   
    send(){
-     this.props.logout();
+     //this.props.logout();
+
    }
    render(){
      return (

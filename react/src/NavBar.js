@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './html-css/images/Logo_White.png';
 import './html-css/css/bootstrap.min.css';
 import './html-css/css/style.css';
+import axios from 'axios';
 
 class NavBar extends Component{
   
@@ -12,7 +13,27 @@ class NavBar extends Component{
     this.props.profil("me");
   }
   deconnexion(){
-    this.props.logout();
+    //this.props.logout();
+    const url= new URLSearchParams();
+    url.append("key",this.props.Ukey);
+    
+    axios.get("http://localhost:8080/Web/auth/logout?"+url).then(res=> this.resplogin(res));
+  }
+  resplogin(resp){
+    console.log(resp.data);
+    if(resp.data["code"]=== 301){
+      //this.setState({"Status":"error","texterror":resp.data["description"]})
+      alert(resp.data["message"]);
+    }
+    else if(resp.data["code"]=== 310){
+      alert(resp.data["message"]);
+    }
+    else if(resp.data["code"]=== 320){
+      alert(resp.data["message"]);
+    }
+    else{
+      this.props.logout();
+    }
   }
 
   principale(){

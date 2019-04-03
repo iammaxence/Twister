@@ -1,9 +1,17 @@
 package tools;
 
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class UserTools {
@@ -202,6 +210,42 @@ public class UserTools {
 		} catch (InstantiationException e) {
 			System.out.println(tools.ReturnJSON.serviceRefused("probleme instantiation exception", 107));
 			return "";
+		}
+		
+	}
+
+	public static JSONObject listFriend(String log) {
+		try {
+			JSONObject res= new JSONObject();			
+			
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			String url="jdbc:mysql://localhost/Brunet_Lin";
+			Connection conn= DriverManager.getConnection(url,"root","root");
+			String query="SELECT * FROM friends WHERE friends.log_user='"+log+"'";
+			Statement st=conn.createStatement();
+			ResultSet rs=st.executeQuery(query);
+			while(rs.next()) { 
+				res.append("friend",rs.getString("log_friend")); //ajout de chaque amis de "log" dans la liste 
+			}
+			
+			
+			st.close();
+			conn.close();
+			return res;
+		}
+		catch (SQLException s) {
+			return ReturnJSON.serviceRefused("probleme existance base de donnee", 1010);
+		}
+		catch (ClassNotFoundException c ) {
+			return ReturnJSON.serviceRefused("probleme class not found", 1020);
+		}
+		catch (IllegalAccessException i ) {
+			return ReturnJSON.serviceRefused("probleme illegal access", 1030);
+		} catch (InstantiationException e) {
+
+			return ReturnJSON.serviceRefused("probleme instantiation exception", 1040);
+		} catch (JSONException e) {
+			return ReturnJSON.serviceRefused("JSON Error", 1050);
 		}
 		
 	}
