@@ -1,16 +1,35 @@
 import React, { Component } from 'react';
 import './html-css/css/bootstrap.min.css';
 import './html-css/css/style.css';
+import axios from 'axios';
 
 class FormulaireSaisieMessage extends Component {
   
 
- send(){
-   //FAIRE SET STATE SUR LA LISTE DES MESSAGES
+  send(message){
+     const url= new URLSearchParams();
+     url.append("key",this.props.Ukey);
+     url.append("text",message);
+     //alert("http://localhost:8080/Web/auth/login?"+url);
+     axios.get("http://localhost:8080/Web/message/addmessage?"+url).then(res=> this.respmessage(res));
+     
   }
+
+
+   
+  respmessage(resp){
+    console.log(resp.data);
+    if(resp.data["code"]){
+      alert(resp.data["message"]);
+    }
+    else{
+      this.props.addMsg(resp.data);
+    }
+  }
+
   
- render(){
-  return(
+  render(){
+   return(
     <div className="col-md-4 offset-md-4">
       <br/>
           <div className="form-inline">
@@ -23,7 +42,7 @@ class FormulaireSaisieMessage extends Component {
           </div>
     </div>
     );
-   }
+  }
   
 }
 

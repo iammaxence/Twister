@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import tools.CheckTools;
 import tools.MessageTools;
 import tools.ReturnJSON;
+import tools.UserTools;
 
 public class Message {
 	public Message() {}
@@ -17,11 +18,11 @@ public class Message {
 	 * @return
 	 */
 	public static JSONObject postMessage(String key, String text) {
-		if(!CheckTools.checkUserConnected(key))
+		if(!CheckTools.alreadyConnected(new StringBuilder(UserTools.getLoginUser(key))))
 			return ReturnJSON.serviceRefused("USER DISCONNECTED", 401);
 		
-		tools.MessageTools.postMessage(key, text);
-		return ReturnJSON.serviceAccepted();
+		return tools.MessageTools.postMessage(key, text);
+		//return ReturnJSON.serviceAccepted();
 	}
 	
 	/**
@@ -32,7 +33,7 @@ public class Message {
 	 * @return
 	 */
 	public static JSONObject listMessage(String key, String query ,String friends) {
-		if(!CheckTools.checkUserConnected(key))
+		if(!CheckTools.alreadyConnected(new StringBuilder(UserTools.getLoginUser(key))))
 			return ReturnJSON.serviceRefused("USER DISCONNECTED", 701);
 		if(query!=null && friends==null)
 			return MessageTools.listByQuery(key,query);
@@ -47,8 +48,8 @@ public class Message {
 	 * @param id
 	 * @return
 	 */
-	public static JSONObject removeMessage(String key,int id) {
-		if(!CheckTools.checkUserConnected(key))
+	public static JSONObject removeMessage(String key,String id) {
+		if(!CheckTools.alreadyConnected(new StringBuilder(UserTools.getLoginUser(key))))
 			return ReturnJSON.serviceRefused("USER DISCONNECTED", 402);
 		
 		return MessageTools.removeMessage(id);

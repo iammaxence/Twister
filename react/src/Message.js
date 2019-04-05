@@ -11,7 +11,7 @@ import Liste_Commentaire from './Liste_Commentaire.js';
 class Message extends Component{
 	constructor(props){
 		super(props);
-		this.state={message:this.props.message,autor:this.props.autor,date:this.props.date,listeCom:this.props.listeCom,listeLike:this.props.listeLike,buttonCom:false,buttonLike:false,liked:false};
+		this.state={message:this.props.message,autor:this.props.autor,date:this.props.date,listeCom:this.props.listeCom,listeLike:this.props.listeLike,id:this.props.id,buttonCom:false,buttonLike:false,liked:false};
 
 	}
 	getCom(){
@@ -29,8 +29,17 @@ class Message extends Component{
 		let modalClose = () => this.setState({ buttonLike: false });
 		var comm;
 
-		if (this.state.buttonCom === true){
+		if (this.state.buttonCom === true && this.state.listeCom !== null){
 			comm=<Liste_Commentaire listeCom={this.props.listeCom}/>;
+		}
+		var like;
+		if (this.props.listeLike === null || this.props.listeLike === undefined){
+			like=<label>Pas de like</label>
+		}
+		else{
+			like=this.props.listeLike.map(likes => {
+					//return <div>{likes.like}<br/></div>;
+					})
 		}
 
 		return (
@@ -39,12 +48,12 @@ class Message extends Component{
 					<div className="media-body pl-2">
 						<div className="media">
 							<div className="media-body">
-								<h4 className="media-heading "> <input type="button" className="btn pseudo pl-1" onClick={() => this.GoProfil(this.state.autor)} value={this.state.autor}/> <small className="float-right pr-2 pt-2"><i>{this.state.date}</i></small></h4>
+								<h4 className="media-heading "> <input type="button" className="btn pseudo pl-1" onClick={() => this.GoProfil(this.state.autor)} value={this.state.autor}/> <div className="float-right pr-2 pt-1"><input type="button" className=" btn btn-outline-success" onClick={(e)=>this.props.delete(this.state.id)} value="X"/></div><small className="float-right pr-2 pt-2"><i>{this.state.date}</i></small> </h4>
 								<p>{this.state.message}</p>
 							    <div className="float-left">
 							        
 							        <ButtonToolbar>
-								        <input type="button" className="btn btn-outline-success" onClick={() => this.setState({ buttonLike: true })} value={this.state.listeLike.length}/>
+								        <input type="button" className="btn btn-outline-success" onClick={() => this.setState({ buttonLike: true })} value={this.state.listeLike.length-1}/>
 								        <input type="button" className="btn btn-outline-success" onClick={() => this.addLike()} value={this.state.liked ? "Unlike" : "Like"}/>
 								        <Modal size="sg" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.buttonLike} onHide={modalClose} listeLike={this.props.listeLike}>
 								        	<Modal.Header closeButton>
@@ -54,9 +63,7 @@ class Message extends Component{
 									        </Modal.Header>
 									        <Modal.Body>
 									          <p>
-									            {this.props.listeLike.map(likes => {
-													return <div>{likes.like}<br/></div>;
-												})}
+									            {like}
 									          </p>
 									        </Modal.Body>
 								        	

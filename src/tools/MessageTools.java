@@ -16,7 +16,7 @@ import com.mongodb.client.MongoCursor;
 
 public class MessageTools {
 	
-	public static void postMessage(String key, String text) {
+	public static JSONObject postMessage(String key, String text) {
 		
 		MongoCollection <Document> coll = Database.getMongocollection("messages");
 		Document d=new Document();
@@ -25,8 +25,23 @@ public class MessageTools {
 		String login=UserTools.getLoginUser(key);
 		d.append("login", login);
 		d.append("date",UserTools.getDate());
+		d.append("listeLike", null);
+		d.append("listeCom", null);
+		JSONObject res=new JSONObject();
+		try {
+			res.append("message", text);
+			res.append("login", login);
+			res.append("date",UserTools.getDate());
+			res.append("listeLike", null);
+			res.append("listeCom", null);
+		} catch (JSONException e) {
+		
+			e.printStackTrace();
+		}
 		
 		coll.insertOne(d);
+		
+		return res;
 	}
 	
 	/*public static void postMessage(String key, String text) {
@@ -73,7 +88,7 @@ public class MessageTools {
 			}
 			list_ami.add(login);//ON AJOUTE LUI MEME POUR AFFICHER SES PROPRES MESSAGES
 			//System.out.println(list_ami);
-			
+			rs.close();
 			st.close();
 			conn.close();
 			
@@ -85,16 +100,23 @@ public class MessageTools {
 			date_doc.put("date", -1);
 			
 			MongoCursor<Document> list=coll.find(doc).sort(date_doc).iterator();
-			List<JSONObject> liste_json=new ArrayList<>();
+			//List<JSONObject> liste_json=new ArrayList<>();
+			JSONObject res=new JSONObject();
 			while(list.hasNext()) {
 				Document o=list.next();
 				//System.out.println(o);
-				JSONObject temp=new JSONObject().put(o.getString("login"),o.get("message"));
 				
-				liste_json.add(temp);
+				JSONObject temp=new JSONObject();
+				temp.append("message",o.get("message"));
+				temp.append("login", o.getString("login"));
+				temp.append("date", o.getString("date"));
+				temp.append("listeLike", o.getString("listeLike"));
+				temp.append("listeCom", o.getString("listeCom"));
+				temp.append("id", o.get("_id"));
+				res.append("messages", temp);
 			}
 			
-			JSONObject res=new JSONObject().put("message", liste_json);
+			
 			System.out.println(res);//AFFICHAGE MESSAGE
 			return res;
 			
@@ -121,15 +143,21 @@ public class MessageTools {
 			
 			MongoCursor<Document> list=coll.find().sort(date_doc).iterator();
 			JSONObject res=new JSONObject();
-			List<String> list_message=new ArrayList<>();
+			//List<String> list_message=new ArrayList<>();
 			while(list.hasNext()) {//Parcours tout les messages et ajoute les messages dans une liste
 				Document o=list.next();
-				System.out.println(o);
-				list_message.add((String)o.get("message"));
-				res.put("auteur", o.get("login"));
+				//System.out.println(o);
+				
+				JSONObject temp=new JSONObject();
+				temp.append("message",o.get("message"));
+				temp.append("login", o.getString("login"));
+				temp.append("date", o.getString("date"));
+				temp.append("listeLike", o.getString("listeLike"));
+				temp.append("listeCom", o.getString("listeCom"));
+				res.append("messages", temp);
 
 			}
-			res.put("message", list_message);//ajoute la liste des messages dans le JSON
+			res.put("message", res);//ajoute la liste des messages dans le JSON
 			return res;
 			
 		} catch (JSONException e) {
@@ -142,12 +170,12 @@ public class MessageTools {
 		return null;
 	}
 
-	public static JSONObject removeMessage(int id) {
+	public static JSONObject removeMessage(String id) {
 		MongoCollection <Document> coll = Database.getMongocollection("messages");
 		
 		Document d=new Document();
-		d.append("_id", id);
-
+		d.append("id", id);
+		System.out.println(d.toString());
 		coll.deleteOne(d);
 		return ReturnJSON.serviceAccepted();
 		

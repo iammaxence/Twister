@@ -8,6 +8,7 @@ public class TestFriend {
 		//Friends.addFriend("I8dZFCw2eTzYY1Po", "tata");
 		//Friends.removeFriend("I8dZFCw2eTzYY1Po", "tata");
 		System.out.println(Friends.listFriend("tata"));
+		
 	}
 	
 

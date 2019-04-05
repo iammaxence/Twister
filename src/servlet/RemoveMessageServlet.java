@@ -40,7 +40,7 @@ public class RemoveMessageServlet extends HttpServlet {
 		
 		response.setContentType("text/json");
 		PrintWriter out=response.getWriter();
-		JSONObject o = Message.removeMessage(key, Integer.parseInt(id));
+		JSONObject o = Message.removeMessage(key, id);
 		out.println(o);
 	}
 

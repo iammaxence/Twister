@@ -32,20 +32,8 @@ class SignIn extends Component {
    }
    
    resplogin(resp){
-    console.log(resp.data);
-    if(resp.data["code"]=== 101){
-      alert(resp.data["message"]);
-    }
-    else if(resp.data["code"]=== 102){
-      alert(resp.data["message"]);
-    }
-    else if(resp.data["code"]=== 103){
-      alert(resp.data["message"]);
-    }
-    else if(resp.data["code"]=== 110){
-      alert(resp.data["message"]);
-    }
-    else if(resp.data["code"]=== 120){
+    //console.log(resp.data);
+    if(resp.data["code"]){
       alert(resp.data["message"]);
     }
     else{
@@ -63,7 +51,7 @@ class SignIn extends Component {
         <div className="limiter">
           <div className="container-login100 justify-content-center">
             <div className="wrap-enreg justify-content-center">
-              <form className="login100-form validate-form ">
+              <div className="login100-form validate-form "onKeyPress= {(e) => {if(e.key === 'Enter'){this.send()}}}>
                 <span className="login100-form-title">
                   Create Account
                 </span>
@@ -102,7 +90,7 @@ class SignIn extends Component {
                   <input className="login100-form-btn w-50" type="submit" value="Register" onClick={((event)=>this.send())} />
                   <input className="login100-form-btn w-50" type="button" value="cancel" onClick={((event)=>this.cancel())} />
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

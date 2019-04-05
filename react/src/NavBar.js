@@ -20,15 +20,8 @@ class NavBar extends Component{
     axios.get("http://localhost:8080/Web/auth/logout?"+url).then(res=> this.resplogin(res));
   }
   resplogin(resp){
-    console.log(resp.data);
-    if(resp.data["code"]=== 301){
-      //this.setState({"Status":"error","texterror":resp.data["description"]})
-      alert(resp.data["message"]);
-    }
-    else if(resp.data["code"]=== 310){
-      alert(resp.data["message"]);
-    }
-    else if(resp.data["code"]=== 320){
+    //console.log(resp.data);
+    if(resp.data["code"]){
       alert(resp.data["message"]);
     }
     else{

@@ -6,51 +6,34 @@ import Liste_ami from './Liste_ami';
 import axios from 'axios';
 
 class Principale extends Component {
-   	/*getMsg(){
-   	const url= new URLSearchParams();
-     var login=this.refs.login.value;
-     var password=this.refs.password.value;
+   	constructor(props){
+   		super(props);
 
-     url.append("login",login);
-     
-     url.append("password",password);
-     
-     //console.log(url);
-     //alert("http://localhost:8080/Web/auth/login?"+url);
-     axios.get("http://localhost:8080/Web/auth/login?"+url).then(res=> this.resplogin(res));
-     
-   }
-   
-   resplogin(resp){
-    console.log(resp.data);
-    if(resp.data["code"]=== 201){
-      //this.setState({"Status":"error","texterror":resp.data["description"]})
-      alert(resp.data["message"]);
+   	}
+
+   	componentDidMount(){
+    	//alert("Mounting");
+		const url= new URLSearchParams();
+		url.append("key",this.props.Ukey);
+		url.append("query",null);
+		if(this.props.page === "Principale"){
+			url.append("friends",this.props.liste_ami);
+		}
+		else{
+			url.append("friends",null);
+		}
+		axios.get("http://localhost:8080/Web/message/listmessage?"+url).then(res=> this.respliste(res));
     }
-    else if(resp.data["code"]=== 202){
-      alert(resp.data["message"]);
-    }
-    else if(resp.data["code"]=== 203){
-      alert(resp.data["message"]);
-    }
-    else if(resp.data["code"]=== 204){
-      alert(resp.data["message"]);
-    }
-    else if(resp.data["code"]=== 210){
-      alert(resp.data["message"]);
-    }
-    else if(resp.data["code"]=== 220){
-      alert(resp.data["message"]);
-    }
-    else{
-      this.props.login(resp.data["Login"],resp.data["Key"]);
-    }
-   }*/
-  
+	respliste(resp){
+		//console.log(resp.data);
+		if(resp.data["code"]){
+		  alert(resp.data["message"]);
+		}
+		else{
+		  this.props.refreshMsg(resp.data["messages"]);
+		}
+	}
    	render(){
-		//var liste_msg=this.getMsg();
-
-
     	return (
      		<div className="Principale">
      			<NavBar logout={this.props.logout} principale={this.props.principale} profil={this.props.profil} user={this.props.user} Ukey={this.props.Ukey}/>
@@ -61,11 +44,11 @@ class Principale extends Component {
 					</div>
 					<div className="column right">
 						<div className="row">
-							<FormulaireSaisieMessage login={this.props.login} /> 
+							<FormulaireSaisieMessage login={this.props.login} Ukey={this.props.Ukey} addMsg={this.props.addMsg} liste_ami={this.props.liste_ami}/> 
 							<div className="container-fluid">
 								<br/>
 							</div>
-							<Liste_msg liste_msg={this.props.liste_msg} profil={this.props.profil} owner={this.props.owner} user={this.props.user}/>
+							<Liste_msg liste_msg={this.props.liste_msg} profil={this.props.profil} delete={this.props.delete} owner={this.props.owner} user={this.props.user} page={this.props.page} Ukey={this.props.Ukey} refreshMsg={this.props.refreshMsg}/>
 						</div>
 					</div>
 				</div>

@@ -17,7 +17,6 @@ public class CheckTools {
 	 */
 	public static boolean checkUserConnected(String key) {
 		try {
-			
 			Connection conn= Database.getMySQLConnection();
 			String query="SELECT * FROM session WHERE session.key_user='"+key+"'";
 			//System.out.println(query);
@@ -30,6 +29,7 @@ public class CheckTools {
 			
 			if(rs.next()) { 
 				if(!checkKeyValidity(rs.getString("date_connexion"),key)) {//Test la validite de la cle (A VERIFIER)
+					
 					AuthTools.deconnexion(key);
 					return false;
 				}
@@ -38,7 +38,7 @@ public class CheckTools {
 				st.executeUpdate(update);
 				return true;
 			}
-			
+			rs.close();
 			st.close();
 			conn.close();
 			return false;
@@ -90,7 +90,7 @@ public class CheckTools {
 			if(rs!=null) { 
 				res=true;
 			}
-			
+			rs.close();
 			st.close();
 			conn.close();
 			return res;
@@ -118,6 +118,7 @@ public class CheckTools {
 			if(rs.next()) {
 				res=true;
 			}
+			rs.close();
 			st.close();
 			conn.close();
 			return res;
@@ -149,13 +150,13 @@ public class CheckTools {
 				//if(rs.getString("key_user")!=null) //Si la clée n'est pas null, user déjà connecté
 				return true;
 			}
-			
+			rs.close();
 			st.close();
 			conn.close();
 			return false;
 		}
 		catch (SQLException s) {
-			System.out.println("herE"); // a enlever après test
+			//System.out.println("herE"); // a enlever après test
 			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 110));
 			return false;
 		}
@@ -184,7 +185,7 @@ public class CheckTools {
 			if(rs.next()) { 
 				return true;
 			}
-
+			rs.close();
 			st.close();
 			conn.close();
 			return false;

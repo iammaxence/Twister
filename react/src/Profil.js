@@ -14,7 +14,7 @@ class Profil extends Component{
 		var owner;
 		var profilpage;
 		if (this.props.owner === "me"){
-	      owner=<FormulaireSaisieMessage login={this.props.login} />;
+	      owner=<FormulaireSaisieMessage login={this.props.login} principale={this.props.principale} Ukey={this.props.Ukey} refreshMsg={this.props.refreshMsg} liste_ami={this.props.liste_ami}/>;
 	      profilpage=this.props.user;
 	    }
 	    else{
@@ -59,7 +59,7 @@ class Profil extends Component{
 							{owner}
 						</div>
 						<br/>
-						<Liste_msg liste_msg={this.props.liste_msg} profil={this.props.profil} owner={this.props.owner} user={this.props.user}/>
+						<Liste_msg liste_msg={this.props.liste_msg} profil={this.props.profil} delete={this.props.delete} owner={this.props.owner} user={this.props.user} page={this.props.page} Ukey={this.props.Ukey} refreshMsg={this.props.refreshMsg}/>
 					</div>
 				</div>
 	       </div>);

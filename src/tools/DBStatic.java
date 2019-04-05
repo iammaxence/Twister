@@ -5,8 +5,9 @@ public class DBStatic {
 	public static String mysql_db="Brunet_Lin";
 	public static String mysql_username="root";
 	public static String mysql_password="root";
-	public static boolean mysql_pooling=true; 
-//	public static boolean mysql_pooling=false; 
+//	public static boolean mysql_pooling=true; 
+	public static boolean mysql_pooling=false; 
+	//EXPORT -> mettre a true
 	//pooling true -> on utilise Datasource qui fait la connection automatique donc pas local
 	//pooling false -> connection locale avec DBStatic
 	

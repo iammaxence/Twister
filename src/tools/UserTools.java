@@ -58,7 +58,7 @@ public class UserTools {
 				//if(rs.getString("key_user")!=null) //Si la clée n'est pas null, user déjà connecté
 				return true;
 			}
-			
+			rs.close();
 			st.close();
 			conn.close();
 			return false;
@@ -162,7 +162,7 @@ public class UserTools {
 			if(rs.next()) { //Probleme si plusieurs login mais login unique normalement
 				res=rs.getString("login");
 			}
-			
+			rs.close();
 			st.close();
 			conn.close();
 			return res;
@@ -183,10 +183,10 @@ public class UserTools {
 			Statement st=conn.createStatement();
 			ResultSet rs=st.executeQuery(query);
 			while(rs.next()) { 
-				res.append("friend",rs.getString("log_friend")); //ajout de chaque amis de "log" dans la liste 
+				res.append("friends",new JSONObject().put("friend",rs.getString("log_friend"))); //ajout de chaque amis de "log" dans la liste 
 			}
 			
-			
+			rs.close();
 			st.close();
 			conn.close();
 			return res;
