@@ -17,8 +17,10 @@ public class AuthTools {
 
 			Connection conn= Database.getMySQLConnection();
 			
-			if(tools.CheckTools.alreadyConnected(log)) //Si déjà connecter, je fais rien
+			if(tools.CheckTools.alreadyConnected(log)) { //Si déjà connecter, je fais rien
+				conn.close();
 				return new StringBuilder();
+			}
 			
 			StringBuilder alea=new StringBuilder().append(generate(16)); //génère une clée aleatoire
 			

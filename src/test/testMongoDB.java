@@ -1,18 +1,22 @@
 package test;
 
+import services.Comments;
+import services.Likes;
 import services.Message;
 
 public class testMongoDB {
 	public static void main(String[] args) {
 		//Message a = new Message();
-		//Message.postMessage("I8dZFCw2eTzYY1Po", "Je m'appel toto");
+		//Message.postMessage("6fg5NrO6D8CYDNMt", "Je m'appelle tata");
 		//a.postMessage("gMkEGTJsoycwKXs9", "Bonjour je suis tata");
 		//a.postMessage("gMkEGTJsoycwKXs9", "Moi,tata a faim");
 		//a.postMessage("I8dZFCw2eTzYY1Po", "Salut, je suis toto");
 		//a.postMessage("I8dZFCw2eTzYY1Po", "Moi,toto je fais du velo");
-		Message.listMessage("VaN6l1aPjnnUqnVd", null,null);
-		Message.removeMessage("VaN6l1aPjnnUqnVd", "5ca777c39f6a8f47b3f43918");
-		Message.listMessage("VaN6l1aPjnnUqnVd", null,null);
+		//Message.listMessage("VaN6l1aPjnnUqnVd", null,null);
+		//Message.removeMessage("QwZhNkoArN3euVxd", "5ca878a1b2371b0f4a95c05a");
+		//Likes.addLike("joris lecon", "5ca906120e66e036a43efcf9");
+		Comments.postComment("tata", "5ca9e108589fcd05dd28ffe7", "COMMENTAIRE2");
+		//Message.listMessage("3CT5wvtrTwurZTTl", "","");
 	}
 	
 }

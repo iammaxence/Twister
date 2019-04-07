@@ -5,9 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,30 +19,32 @@ import com.mongodb.client.MongoCursor;
 public class MessageTools {
 	
 	public static JSONObject postMessage(String key, String text) {
-		
+
+		Database.MongoOpen();
 		MongoCollection <Document> coll = Database.getMongocollection("messages");
 		Document d=new Document();
+		
 		d.append("message", text);
 		d.append("key", key);
 		String login=UserTools.getLoginUser(key);
 		d.append("login", login);
 		d.append("date",UserTools.getDate());
-		d.append("listeLike", null);
-		d.append("listeCom", null);
+		d.append("listeLike", Arrays.asList());
+		d.append("listeCom", Arrays.asList());
 		JSONObject res=new JSONObject();
 		try {
 			res.append("message", text);
 			res.append("login", login);
 			res.append("date",UserTools.getDate());
-			res.append("listeLike", null);
-			res.append("listeCom", null);
+			res.append("listeLike", Arrays.asList());
+			res.append("listeCom", Arrays.asList());
 		} catch (JSONException e) {
 		
-			e.printStackTrace();
+			return ReturnJSON.serviceRefused("JSON ERROR", 120);
 		}
 		
 		coll.insertOne(d);
-		
+		Database.MongoClose();
 		return res;
 	}
 	
@@ -91,7 +95,7 @@ public class MessageTools {
 			rs.close();
 			st.close();
 			conn.close();
-			
+			Database.MongoOpen();
 			MongoCollection <Document> coll = Database.getMongocollection("messages");
 			//recupere la liste des amis de mongodb
 			Document doc=new Document();
@@ -110,14 +114,16 @@ public class MessageTools {
 				temp.append("message",o.get("message"));
 				temp.append("login", o.getString("login"));
 				temp.append("date", o.getString("date"));
-				temp.append("listeLike", o.getString("listeLike"));
-				temp.append("listeCom", o.getString("listeCom"));
+				temp.append("listeLike", o.get("listeLike"));
+				temp.append("listeCom", o.get("listeCom"));
 				temp.append("id", o.get("_id"));
 				res.append("messages", temp);
+				
 			}
-			
+			list.close();
 			
 			System.out.println(res);//AFFICHAGE MESSAGE
+			Database.MongoClose();
 			return res;
 			
 		}
@@ -130,38 +136,39 @@ public class MessageTools {
 
 	public static JSONObject listProfile(String key, String friends) {
 		try {
-			
-			if(!CheckTools.checkUserConnected(key))
-				return ReturnJSON.serviceRefused("Not connected", 0);
-			
+			Database.MongoOpen();
 			MongoCollection <Document> coll = Database.getMongocollection("messages");
+			
 			//recupere la liste des amis de mongodb
 			Document doc=new Document();
 			doc.append("login",friends);
 			Document date_doc=new Document();
 			date_doc.put("date", -1);
 			
-			MongoCursor<Document> list=coll.find().sort(date_doc).iterator();
+			MongoCursor<Document> list=coll.find(doc).sort(date_doc).iterator();
 			JSONObject res=new JSONObject();
-			//List<String> list_message=new ArrayList<>();
+
 			while(list.hasNext()) {//Parcours tout les messages et ajoute les messages dans une liste
 				Document o=list.next();
-				//System.out.println(o);
+//				System.out.println(o);
 				
 				JSONObject temp=new JSONObject();
 				temp.append("message",o.get("message"));
 				temp.append("login", o.getString("login"));
 				temp.append("date", o.getString("date"));
-				temp.append("listeLike", o.getString("listeLike"));
-				temp.append("listeCom", o.getString("listeCom"));
+				temp.append("listeLike", o.get("listeLike"));
+				temp.append("listeCom", o.get("listeCom"));
+				temp.append("id", o.get("_id"));
 				res.append("messages", temp);
-
 			}
-			res.put("message", res);//ajoute la liste des messages dans le JSON
+			list.close();
+			//res.put("message", res);//ajoute la liste des messages dans le JSON
+			System.out.println(res);
+			Database.MongoClose();
 			return res;
 			
 		} catch (JSONException e) {
-			return ReturnJSON.serviceRefused("SQL ERROR", 110);
+			return ReturnJSON.serviceRefused("JSON ERROR", 120);
 		}
 	}
 
@@ -171,70 +178,78 @@ public class MessageTools {
 	}
 
 	public static JSONObject removeMessage(String id) {
+		Database.MongoOpen();
 		MongoCollection <Document> coll = Database.getMongocollection("messages");
 		
 		Document d=new Document();
-		d.append("id", id);
-		System.out.println(d.toString());
+		d.append("_id", new ObjectId(id));
+		//System.out.println(d.toString());
 		coll.deleteOne(d);
+		Database.MongoClose();
 		return ReturnJSON.serviceAccepted();
 		
 	}
 	
 	public static JSONObject addComment(String login,String id_message,String text) {
+		Database.MongoOpen();
 		MongoCollection <Document> coll = Database.getMongocollection("messages");
 		
-		Document doc=new Document().append("_id", id_message);
+		Document doc=new Document().append("_id", new ObjectId(id_message));
 		
 		Document comm=new Document();
 		comm.append("author", login);
 		comm.append("content", text);
 		comm.append("date", UserTools.getDate());
 			
-		Document add=new Document().append("$push", new Document().append("comments", comm));
+		Document add=new Document().append("$push", new Document().append("listeCom", comm));
 		coll.updateOne(doc, add);
+		Database.MongoClose();
 		return ReturnJSON.serviceAccepted();
 	}
 	
 	public static JSONObject removeComment(String login,String id_message,String id_comment) {
+		Database.MongoOpen();
 		MongoCollection <Document> coll = Database.getMongocollection("messages");
 		
 		Document search=new Document();
-		search.append("_id",id_message);
+		search.append("_id",new ObjectId(id_message));
 		
 		Document comm=new Document();
-		comm.append("_id",id_comment);
+		comm.append("_id",new ObjectId(id_comment));
 		
 		Document query=new Document();
-		query.append("$pull", new Document().append("comments", comm));
+		query.append("$pull", new Document().append("listeCom", comm));
 		coll.updateOne(search,query);
-		
+		Database.MongoClose();
 		return ReturnJSON.serviceAccepted();
 	}
 	
 	public static JSONObject addLike(String login,String id_message) {
+		Database.MongoOpen();
 		MongoCollection <Document> coll = Database.getMongocollection("messages");
 		
-		Document doc=new Document().append("_id", id_message);
+		Document doc=new Document().append("_id", new ObjectId(id_message));
 		
 		Document like=new Document();
-		like.append("$push",new Document().append("like", login));
-			
-		
+		like.append("$push",new Document().append("listeLike", login));
+//		System.out.println(like.toString());
+//		System.out.println(doc.toString());
 		coll.updateOne(doc, like);
+		Database.MongoClose();
 		return ReturnJSON.serviceAccepted();
 	}
 	
 	public static JSONObject removeLike(String login,String id_message) {
+		Database.MongoOpen();
 		MongoCollection <Document> coll = Database.getMongocollection("messages");
 		
 		Document search=new Document();
-		search.append("_id",id_message);
+		search.append("_id",new ObjectId(id_message));
 		
 		Document query=new Document();
-		query.append("$pull", new Document().append("like", login));
+		query.append("$pull", new Document().append("listeLike", login));
 		coll.updateOne(search,query);
-		
+		Database.MongoClose();
 		return ReturnJSON.serviceAccepted();
 	}
 }

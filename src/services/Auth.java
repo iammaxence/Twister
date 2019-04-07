@@ -24,10 +24,7 @@ public class Auth {
 			return ReturnJSON.serviceRefused("Error Password",202);
 		}
 		
-		//A MODIFIER
-		//StringBuilder log= tools.Login.getLoginUser(login);
 		StringBuilder key=new StringBuilder().append(tools.AuthTools.insertNvlleSession(new StringBuilder(login),root)); //Obtenir cle (qui expire)connexion
-		//CheckTools.checkKeyValidity(, key);
 		
 		if(key.length()==0) { //Si déjà connecter==longueur de la clée vide
 			return ReturnJSON.serviceRefused("Already Connected", 203);

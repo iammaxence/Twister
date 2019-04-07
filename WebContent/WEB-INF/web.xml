@@ -825,6 +825,11 @@ standard deployment descriptor.
     <servlet-name>ListFriend</servlet-name>
     <servlet-class> servlet.ListFriendServlet </servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ListConnected</servlet-name>
+    <servlet-class> servlet.ListConnected</servlet-class>
+  </servlet>
+    
   
   
   
@@ -880,6 +885,12 @@ standard deployment descriptor.
     <servlet-name>ListFriend</servlet-name>
     <url-pattern> /friends/list </url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ListConnected</servlet-name>
+    <url-pattern> /listconnected </url-pattern>
+  </servlet-mapping>
+
+
   
   
  <filter>

@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import tools.CheckTools;
 import tools.ReturnJSON;
+import tools.UserTools;
 
 public class Friends {
 	
@@ -16,7 +17,7 @@ public class Friends {
 	 */
 	public static JSONObject addFriend(String key,String logFriend) { 
 		
-		if(!CheckTools.checkUserConnected(key)) 
+		if(!CheckTools.alreadyConnected(new StringBuilder(UserTools.getLoginUser(key))))
 			return ReturnJSON.serviceRefused("User Disconnected", 501);
 		
 		if(!CheckTools.exist(logFriend)) 
@@ -41,7 +42,7 @@ public class Friends {
 	 */
 	public static JSONObject removeFriend(String key,String logFriend) { 
 		
-		if(!CheckTools.checkUserConnected(key)) {
+		if(!CheckTools.alreadyConnected(new StringBuilder(UserTools.getLoginUser(key)))) {
 			return ReturnJSON.serviceRefused("User Disconnected", 601);
 		}
 		

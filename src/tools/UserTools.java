@@ -56,11 +56,11 @@ public class UserTools {
 			
 			if(rs.next()) { //si user existe dans la base de données session => il est déjà connecté
 				//if(rs.getString("key_user")!=null) //Si la clée n'est pas null, user déjà connecté
+				rs.close();
+				st.close();
+				conn.close();
 				return true;
 			}
-			rs.close();
-			st.close();
-			conn.close();
 			return false;
 		}
 		catch (SQLException s) {
@@ -198,6 +198,32 @@ public class UserTools {
 			return ReturnJSON.serviceRefused("JSON ERROR", 120);
 		}
 		
+	}
+
+	public static JSONObject listCo() {
+		try {
+			JSONObject res= new JSONObject();			
+			
+			Connection conn= Database.getMySQLConnection();
+			String query="SELECT * FROM session";
+			Statement st=conn.createStatement();
+			ResultSet rs=st.executeQuery(query);
+			while(rs.next()) { 
+				res.append("connected",new JSONObject().put("guy",rs.getString("login"))); //ajout de chaque amis de "log" dans la liste 
+			}
+			
+			rs.close();
+			st.close();
+			conn.close();
+			System.out.println(res);
+			return res;
+		}
+		catch (SQLException s) {
+			return ReturnJSON.serviceRefused("SQL ERROR", 110);
+		}
+		catch (JSONException e) {
+			return ReturnJSON.serviceRefused("JSON ERROR", 120);
+		}
 	}
 	
 }

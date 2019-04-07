@@ -35,11 +35,12 @@ public class Message {
 	public static JSONObject listMessage(String key, String query ,String friends) {
 		if(!CheckTools.alreadyConnected(new StringBuilder(UserTools.getLoginUser(key))))
 			return ReturnJSON.serviceRefused("USER DISCONNECTED", 701);
-		if(query!=null && friends==null)
+		if(!query.isEmpty() && friends.isEmpty())
 			return MessageTools.listByQuery(key,query);
-		if(friends!=null && query==null)
+		else if(!friends.isEmpty() && query.isEmpty())
 			return MessageTools.listProfile(key,friends);
-		return MessageTools.listAllMessage(key);
+		else
+			return MessageTools.listAllMessage(key);
 	}
 	
 	/**

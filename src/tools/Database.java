@@ -17,6 +17,7 @@ public class Database {
 	
 	private DataSource dataSource; 
 	private static Database database;
+	private static MongoClient mongo;
 	
 	public Database(String jndiname) throws SQLException { 
 		try { 
@@ -45,9 +46,14 @@ public class Database {
 		} 
 	}
 	public static MongoCollection <Document> getMongocollection(String table) {
-		MongoClient mongo=MongoClients.create(DBStatic.mongodb_host);
 		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
 		return  mDB.getCollection(table);
+	}
+	public static void MongoOpen() {
+		mongo=MongoClients.create(DBStatic.mongodb_host);
+	}
+	public static void MongoClose() {
+		mongo.close();
 	}
 }
 

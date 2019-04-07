@@ -2,7 +2,9 @@ package services;
 
 import org.json.JSONObject;
 
+import tools.CheckTools;
 import tools.ReturnJSON;
+import tools.UserTools;
 
 public class User {
 	
@@ -25,5 +27,12 @@ public class User {
 		
 		return tools.UserTools.insertUser(nom, prenom, login, psswd, mail);
 
+	}
+
+	public static JSONObject listCo(String key) {
+		if(!CheckTools.alreadyConnected(new StringBuilder(UserTools.getLoginUser(key))))
+			return ReturnJSON.serviceRefused("User Disconnected", 501);
+
+		return UserTools.listCo();
 	}
 }
