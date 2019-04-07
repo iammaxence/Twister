@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 
 
 class Liste_Co extends Component {
-   	constructor(props){
-   		super(props);
-
-   	}
-   	GoProfil(ami){
+	/*constructor(props){
+		super(props);
+	}*/
+	GoProfil(ami){
 		this.props.profil(ami);
 	}
 
@@ -16,10 +15,9 @@ class Liste_Co extends Component {
 			temp=<label>Personne co</label>;
 		}
 		else { 
-
 			temp=this.props.liste_co.map(amis => {
 					return <li><input type="button" className="btn line-h" onClick={() => this.GoProfil(amis.guy)} value={amis.guy}/></li>;
-				});
+			});
 		}
 
 		return (
@@ -28,7 +26,6 @@ class Liste_Co extends Component {
 				<ul>
 				{temp}
 				</ul>
-				
 			</div>
 		);
 	}

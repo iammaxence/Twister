@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 class Liste_ami extends Component{
-	constructor(props){
+	/*constructor(props){
 		super(props);
 		//this.state={liste:[{ami:'Remi Susceptible'},{ami:'Joris LECON'}]};
-	}
+	}*/
 	GoProfil(ami){
 		this.props.profil(ami);
 	}
@@ -16,10 +16,9 @@ class Liste_ami extends Component{
 			temp=<label>Pas d'amis</label>;
 		}
 		else { 
-
 			temp=this.props.liste_ami.map(amis => {
 					return <li><input type="button" className="btn line-h" onClick={() => this.GoProfil(amis.friend)} value={amis.friend}/></li>;
-				});
+			});
 		}
 
 		return (
@@ -28,7 +27,6 @@ class Liste_ami extends Component{
 				<ul>
 				{temp}
 				</ul>
-				
 			</div>
 		);
 	}

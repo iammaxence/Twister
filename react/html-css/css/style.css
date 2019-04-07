@@ -20,18 +20,28 @@ body{
 	background-color: #005824
 }
 .white{
-	background-color: #ffffff
+	background-color: #fff;
+}
+.white1{
+	background-color: #fff;
+	border-top: 1px solid #cbcbcb;
+	border-left: 1px solid #cbcbcb;
+}
+.white2{
+	background-color: #fff;
+	border-top: 1px solid #cbcbcb;
+	border-left: 1px solid #cbcbcb;
+	border-right: 1px solid #cbcbcb;
 }
 .gray{
 	background-color: #eeeeee	
 }
-.sidebar{
-	border-right: 3px solid rgba(0,0,0,0.5);
 
-}
 .botbar{
-	border-bottom: 2px solid rgba(0,0,0,0.5);
-	width: 99%;
+	border-bottom: 1px solid #cbcbcb;
+}
+.topbar{
+	border-top: 2px solid #cbcbcb;
 }
 textarea{
 	resize: none;
@@ -86,6 +96,10 @@ body, html {
 	height: 100%;
 	font-family: Poppins-Regular, sans-serif;
 	background-color: #efefef;
+}
+.Principale,.Profil{
+	background-image: url(../images/Background.png);
+	background-attachment: fixed;
 }
 
 .110{
@@ -162,6 +176,30 @@ body, html {
 	}
 }
 
+.w-25{
+	width: 15% !important;
+}
+@media (min-width: 576px) {
+	.w-25{
+		width: 55% !important;
+	}
+}
+@media (min-width: 768px) {
+	.w-25{
+		width: 45% !important;
+	}
+}
+@media (min-width: 992px) {
+	.w-25{
+		width: 35% !important;
+	}
+}
+@media (min-width: 1200px) {
+	.w-25{
+		width: 25% !important;
+	}
+}
+
 .line-h{
 	line-height: 1;
 }
@@ -185,4 +223,16 @@ body, html {
 }
 .fs-3{
 	font-size: 0.8em;
+}
+.deco{
+	background-image: url(../images/power-button.png);
+	background-repeat: no-repeat;
+	
+}
+.pr-25{
+	padding-right: 0.75rem !important;
+}
+
+.cursor{
+	cursor: pointer;
 }

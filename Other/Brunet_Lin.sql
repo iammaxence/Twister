@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 07 avr. 2019 à 14:17
+-- Généré le :  Dim 07 avr. 2019 à 21:28
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.2.14
 
@@ -44,7 +44,7 @@ INSERT INTO `friends` (`log_user`, `log_friend`, `date_friendship`) VALUES
 ('tata', 'toto', '2019-04-03 19:02:38'),
 ('tata', 'Spiderman', '2019-04-03 19:02:44'),
 ('tata', 'tatou', '2019-04-06 16:50:17'),
-('tata', 'joris lecon', '2019-04-07 12:21:20');
+('tata', 'joris lecon', '2019-04-07 19:32:29');
 
 -- --------------------------------------------------------
 
@@ -92,6 +92,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`login`, `password`, `prenom`, `nom`, `mail`) VALUES
+('Guillaume', 0x617a65, 'Guillaume', 'Lethug', 'guigui@lol.mdr'),
 ('Joris Lecon', 0x617a65, 'Joris', 'Lecon', 'jojolefou@gmail.com'),
 ('Spiderman', 0x6d6470, 'Peter', 'Parker', 'spider@gmail.com'),
 ('tata', 0x6d6470, 'second_prenom', 'second_name', 'othermail@gmail.com'),

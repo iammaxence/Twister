@@ -16,7 +16,7 @@ class Commentaire extends Component{
 						<div className="media">
 							<div className="media-body">
 								<h4 className="media-heading fs-2">{this.state.autor} <small className="float-right pr-2 pt-1"><i>{this.state.date}</i></small></h4>
-									<p className="fs-3">{this.state.commentaire}</p>
+								<p className="fs-3">{this.state.commentaire}</p>
 							</div>
 						</div>
 					</div>
