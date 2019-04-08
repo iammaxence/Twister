@@ -148,6 +148,11 @@ class Profil extends Component{
 						<div>
 							{owner}
 						</div>
+						<div className="container-fluid">
+								<br/>
+								<div className="botbar"></div> 
+								<br/>
+						</div>
 						<br/>
 						<Liste_msg liste_msg={this.props.liste_msg} profil={this.props.profil} delete={this.props.delete} owner={this.props.owner} user={this.props.user} page={this.props.page} Ukey={this.props.Ukey} refreshMsg={this.props.refreshMsg}/>
 					</div>

@@ -42,8 +42,10 @@ class Principale extends Component {
 					
 					<div className="col-md-6 offset-md-2 white1">
 						<div className="row">
-							<FormulaireSaisieMessage login={this.props.login} Ukey={this.props.Ukey} liste_ami={this.props.liste_ami} refreshMsg={this.props.refreshMsg}/> 
+							<FormulaireSaisieMessage login={this.props.login} Ukey={this.props.Ukey} liste_ami={this.props.liste_ami} refreshMsg={this.props.refreshMsg}/>
 							<div className="container-fluid">
+								<br/>
+								<div className="botbar"></div> 
 								<br/>
 							</div>
 							<Liste_msg liste_msg={this.props.liste_msg} profil={this.props.profil} delete={this.props.delete} owner={this.props.owner} user={this.props.user} page={this.props.page} Ukey={this.props.Ukey} refreshMsg={this.props.refreshMsg}/>
