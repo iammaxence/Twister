@@ -45,7 +45,7 @@ class Liste_Commentaire extends Component{
 		return(
 			<div className="container"> 
 				<div className="row topbar">
-					<ul className="list-unstyled w-75">
+					<ul className="list-unstyled w-85">
 						{temp}
 					</ul>
 					<div className="form-inline pt-1 w-100 ">

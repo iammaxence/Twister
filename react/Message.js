@@ -106,14 +106,21 @@ class Message extends Component{
 			//console.log(like)
 		}
 		var deleteB;
-		console.log(this.state.autor.toString())
-		console.log(this.props.user)
+		//console.log(this.state.autor.toString())
+		//console.log(this.props.user)
 		if(this.state.autor.toString()===this.props.user){
-			deleteB=<div className="float-right pr-2 pt-1"><input type="image" width="25px" src={del} onClick={(e)=>{this.props.delete(this.state.id);this.setState({showed:false})}} /></div>
+			deleteB=<div className="float-right pr-2 pt-1"><input type="image" width="25px" src={del} alt="delete" onClick={(e)=>{this.props.delete(this.state.id);this.setState({showed:false})}} /></div>
 		}
 		else{
 			deleteB=''
 		}
+
+		//Conversion date
+		var split=this.state.date[0].split(' ');
+		var jour=split[0].split('-');
+		var heure=split[1].split(':',2);
+		var annee=jour[0].split('');
+		var date=jour[2]+"/"+jour[1]+"/"+annee[2]+annee[3]+" "+heure[0]+":"+heure[1];
 
 		if(this.state.showed){
 			return (
@@ -125,13 +132,13 @@ class Message extends Component{
 									<h4 className="media-heading "> 
 										<input type="button" className="btn pseudo pl-1" onClick={() => this.GoProfil(this.state.autor.toString())} value={this.state.autor}/> 
 										{deleteB} 
-										<small className="float-right pr-2 pt-2"><i>{this.state.date}</i></small> 
+										<small className="float-right pr-2 pt-2 fs-2"><i>{date}</i></small> 
 									</h4>
-									<p>{this.state.message}</p>
+									<p className="fs-1">{this.state.message}</p>
 									<div className="float-left">
 										<ButtonToolbar>
 											<input type="button" className="btn btn-outline-success" onClick={() => this.setState({ buttonLike: true })} value={likelength}/>
-											<input type="image" height="35px" width="35px" src={this.state.liked ? unlikeB : likeB} onClick={() => this.addLike()} />
+											<input type="image" height="35px" width="35px" alt="Likes" src={this.state.liked ? unlikeB : likeB} onClick={() => this.addLike()} />
 											<Modal size="sg" aria-labelledby="contained-modal-title-vcenter" centered show={this.state.buttonLike} onHide={modalClose}>
 												<Modal.Header closeButton>
 													<Modal.Title id="contained-modal-title-vcenter">
@@ -148,7 +155,7 @@ class Message extends Component{
 										</ButtonToolbar>
 									</div>
 									<div className="float-right pr-25">
-										<input type="image" className="pt-4" width="20px" src={this.state.buttonCom ? moins : plus} onClick={((event)=>this.getCom())} aria-controls="example-collapse-text" aria-expanded={this.state.buttonCom} />
+										<input type="image" className="pt-4" width="20px" alt="extend" src={this.state.buttonCom ? moins : plus} onClick={((event)=>this.getCom())} aria-controls="example-collapse-text" aria-expanded={this.state.buttonCom} />
 									</div>
 									<div className="pt-5" >
 										<Collapse in={this.state.buttonCom}>

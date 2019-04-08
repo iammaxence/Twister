@@ -49,19 +49,19 @@ class NavBar extends Component{
 						<div className="navbar-collapse collapse w-100 justify-content-center">
 							<form className="form-inline">
 								<input className="form-control mr-sm-2" id="search" type="text" placeholder="Search"/>
-								<img type="image" className="cursor" width="35px" src={search} value="Search" onClick={(event)=>this.search(document.getElementById("search").value)} />
+								<img type="image" className="cursor" width="35px" src={search} alt="search" value="Search" onClick={(event)=>this.search(document.getElementById("search").value)} />
 							</form>
 						</div>
 						<div className="navbar-collapse collapse w-100 order-3">
 							<ul className="navbar-nav ml-auto pt-1">
 								<li className="nav-item">
 									<div className="nav-link">
-										<input className="" type="image" width="35px" src={profil} value="Profil" onClick={((event)=>this.profil())}/>
+										<input className="" type="image" width="35px" src={profil} alt="Profil" value="Profil" onClick={((event)=>this.profil())}/>
 									</div>
 								</li>
 								<li className="nav-item">
 									<div className="nav-link " >
-										<input className="" type="image" width="35px" src={deco} value="Deconnexion" onClick={((event)=>this.deconnexion())}/>
+										<input className="" type="image" width="35px" src={deco} alt="Deconnexion" value="Deconnexion" onClick={((event)=>this.deconnexion())}/>
 									</div>
 								</li>
 							</ul>

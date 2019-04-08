@@ -11,7 +11,12 @@ import axios from 'axios';
 class Profil extends Component{
 	constructor(props){
 		super(props)
-		this.state={followed: this.props.liste_ami.find(ami=>ami.friend === this.props.owner) !== undefined}
+		if(this.props.liste_ami === undefined){
+			this.state={followed:false}
+		}
+		else{
+			this.state={followed: this.props.liste_ami.find(ami=>ami.friend === this.props.owner) !== undefined}
+		}
 		console.log(this.props.liste_ami)
 	}
 
@@ -67,7 +72,13 @@ class Profil extends Component{
 		}
 	}
 	componentWillReceiveProps(nextP){
-		this.setState({followed: nextP.liste_ami.find(ami=>ami.friend === nextP.owner) !== undefined});
+		if(this.props.liste_ami === undefined){
+			this.setState({followed:false});
+		}
+		else{
+			this.setState({followed: nextP.liste_ami.find(ami=>ami.friend === nextP.owner) !== undefined})
+		}
+		
 	}
 
 	render(){
@@ -77,10 +88,18 @@ class Profil extends Component{
 		if (this.props.owner === "me" || this.props.owner === this.props.user){
 			owner=<FormulaireSaisieMessage login={this.props.login} principale={this.props.principale} Ukey={this.props.Ukey} refreshMsg={this.props.refreshMsg} liste_ami={this.props.liste_ami}/>;
 			profilpage=this.props.user;
-			following=
-					<div className="col-md-4 pt-4">
-						<b>{this.props.liste_ami.length}</b> following
-					</div>;
+			if(this.props.liste_ami !== undefined){
+				following=
+						<div className="col-md-4 pt-4">
+							<b>{this.props.liste_ami.length}</b> following
+						</div>;
+			}
+			else{
+				following=
+						<div className="col-md-4 pt-4">
+							<b>0</b> following
+						</div>;
+			}
 		}
 		else{
 			profilpage=this.props.owner;
@@ -91,11 +110,11 @@ class Profil extends Component{
 		if(this.props.owner === 'me'|| this.props.owner === this.props.user){
 			followBut='';
 		}
-		else if(this.props.liste_ami==="empty" || this.props.liste_ami===undefined || this.state.followed || this.props.owner === "me" ){
-			followBut=<input className="float-right pb-2" type="image" width="50px" src={unfollowIc} onClick={((event)=>this.unfollow())} />;			
+		else if(this.state.followed){
+			followBut=<input className="float-right pb-2" type="image" width="50px" src={unfollowIc} alt="Unfollow" onClick={((event)=>this.unfollow())} />;			
 		}
 		else{
-			followBut=<input className="float-right pb-2" type="image" width="50px" src={followIc} onClick={((event)=>this.follow())} />;
+			followBut=<input className="float-right pb-2" type="image" width="50px" src={followIc} alt="Follow" onClick={((event)=>this.follow())} />;
 		}
 
 		return (

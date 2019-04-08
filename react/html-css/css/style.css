@@ -99,6 +99,7 @@ body, html {
 }
 .Principale,.Profil{
 	background-image: url(../images/Background.png);
+	background-position: bottom;
 	background-attachment: fixed;
 }
 
@@ -219,15 +220,10 @@ body, html {
 	font-size: 1em;
 }
 .fs-2{
-	font-size: 1em;
+	font-size: 0.7em;
 }
 .fs-3{
 	font-size: 0.8em;
-}
-.deco{
-	background-image: url(../images/power-button.png);
-	background-repeat: no-repeat;
-	
 }
 .pr-25{
 	padding-right: 0.75rem !important;
