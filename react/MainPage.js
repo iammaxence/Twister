@@ -14,6 +14,7 @@ class MainPage extends Component {
 		this.refreshMsg = this.refreshMsg.bind(this);
 		this.getPrincipal = this.getPrincipal.bind(this);
 		this.delete = this.delete.bind(this);
+    this.deleteCom = this.deleteCom.bind(this);
 		this.getListCo = this.getListCo.bind(this);
 	}
 
@@ -63,6 +64,13 @@ class MainPage extends Component {
 		url.append("key",this.state.Ukey);
 		axios.get("http://localhost:8080/Web/message/removemessage?"+url).then(this.getPrincipal());
 	}
+  deleteCom(id_msg,id_com){
+    const url= new URLSearchParams();
+    url.append("id_message",id_msg);
+    url.append("id_comment",id_com)
+    url.append("login",this.state.user);
+    axios.get("http://localhost:8080/Web/message/removecomment?"+url);
+  }
 	getListCo(liste){
 		this.setState({liste_co:liste});
 		//console.log(this.state.liste_co)
@@ -73,7 +81,7 @@ class MainPage extends Component {
 			<div className="MainPage">
 				<NavigationPannel login={this.getConnected} logout={this.setLogout} register={this.getRegister} profil={this.getProfil} connected={this.state.connected} page={this.state.page} 
 					principale={this.getPrincipal} owner={this.state.owner} liste_msg={this.state.liste_msg} user={this.state.user} Ukey={this.state.Ukey} 
-					getListAmi={this.getListAmi} liste_ami={this.state.liste_ami} refreshMsg={this.refreshMsg} delete={this.delete} liste_co={this.state.liste_co} getListCo={this.getListCo}/>
+					getListAmi={this.getListAmi} liste_ami={this.state.liste_ami} refreshMsg={this.refreshMsg} delete={this.delete} deleteCom={this.deleteCom} liste_co={this.state.liste_co} getListCo={this.getListCo}/>
 			</div>);
 	}
 }

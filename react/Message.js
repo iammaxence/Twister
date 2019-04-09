@@ -93,7 +93,7 @@ class Message extends Component{
 		var likelength=this.state.likelength;
 		
 		if (this.state.buttonCom === true && this.state.listeCom !== null){
-			comm=<Liste_Commentaire listeCom={this.props.listeCom} refresh={this.refresh.bind(this)} refreshMsg={this.props.refreshMsg} login={this.props.user} id_msg={this.state.id} Ukey={this.props.Ukey} />;
+			comm=<Liste_Commentaire page={this.props.page} listeCom={this.props.listeCom} refresh={this.refresh.bind(this)} refreshMsg={this.props.refreshMsg} login={this.props.user} autor={this.state.autor} deleteCom={this.props.deleteCom} id_msg={this.state.id} Ukey={this.props.Ukey} profil={this.props.profil}/>;
 		}
 		var like='';
 		//console.log(this.state.message)

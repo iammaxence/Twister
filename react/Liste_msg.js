@@ -15,7 +15,7 @@ class Liste_msg extends Component{
 		}
 		else { 
 			temp=this.props.liste_msg.map(messages => {
-					return <Message message={messages.message} autor={messages.login} date={messages.date} listeCom={messages.listeCom} listeLike={messages.listeLike} profil={this.props.profil} owner={this.props.owner} Ukey={this.props.Ukey} user={this.props.user} id={messages.id} refreshMsg={this.props.refreshMsg} delete={this.props.delete}/>;
+					return <Message message={messages.message} autor={messages.login} date={messages.date} listeCom={messages.listeCom} listeLike={messages.listeLike} profil={this.props.profil} owner={this.props.owner} Ukey={this.props.Ukey} user={this.props.user} id={messages.id} refreshMsg={this.props.refreshMsg} page={this.props.page} delete={this.props.delete} deleteCom={this.props.deleteCom}/>;
 			});
 		}
 		return (

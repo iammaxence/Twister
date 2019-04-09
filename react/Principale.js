@@ -48,7 +48,7 @@ class Principale extends Component {
 								<div className="botbar"></div> 
 								<br/>
 							</div>
-							<Liste_msg liste_msg={this.props.liste_msg} profil={this.props.profil} delete={this.props.delete} owner={this.props.owner} user={this.props.user} page={this.props.page} Ukey={this.props.Ukey} refreshMsg={this.props.refreshMsg}/>
+							<Liste_msg liste_msg={this.props.liste_msg} profil={this.props.profil} delete={this.props.delete} deleteCom={this.props.deleteCom} owner={this.props.owner} user={this.props.user} page={this.props.page} Ukey={this.props.Ukey} refreshMsg={this.props.refreshMsg}/>
 						</div>
 					</div>
 					<div className="col-md-2 column white2">

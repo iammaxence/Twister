@@ -21,7 +21,17 @@ class Liste_Commentaire extends Component{
 			alert(resp.data["message"]);
 		}
 		else{
+			console.log(this.props.login)
+			console.log(this.props.autor)
+			if(this.props.page==='Principale'){
 				this.props.refresh();
+			}
+			else if(this.props.login===this.props.autor[0]){
+				this.props.profil("me");
+			}
+			else{
+				this.props.profil(this.props.autor);	
+			}
 		}
 	}
 
@@ -36,7 +46,7 @@ class Liste_Commentaire extends Component{
 		console.log(this.state.listeCom[0])
 		if(this.state.listeCom[0].length !== 0){
 			temp=this.state.listeCom[0].map(commentaires => {
-							return <Commentaire commentaire={commentaires.content} autor={commentaires.author} date={commentaires.date}/>;
+							return <Commentaire commentaire={commentaires.content} deleteCom={this.props.deleteCom} autor={commentaires.author} date={commentaires.date} user={this.props.login} id_msg={this.props.id_msg}/>;
 			});
 		}
 		else { 

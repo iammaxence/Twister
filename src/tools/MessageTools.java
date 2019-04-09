@@ -17,7 +17,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
 public class MessageTools {
-	
+	private static int id=0;
 	public static JSONObject postMessage(String key, String text) {
 
 		Database.MongoOpen();
@@ -195,19 +195,18 @@ public class MessageTools {
 		MongoCollection <Document> coll = Database.getMongocollection("messages");
 		
 		Document doc=new Document().append("_id", new ObjectId(id_message));
-		
 		Document comm=new Document();
 		comm.append("author", login);
 		comm.append("content", text);
 		comm.append("date", UserTools.getDate());
-			
+		
 		Document add=new Document().append("$push", new Document().append("listeCom", comm));
 		coll.updateOne(doc, add);
 		Database.MongoClose();
 		return ReturnJSON.serviceAccepted();
 	}
-	
-	public static JSONObject removeComment(String login,String id_message,String id_comment) {
+
+	public static JSONObject removeComment(String login,String id_message,String date) {//String id_comment) {
 		Database.MongoOpen();
 		MongoCollection <Document> coll = Database.getMongocollection("messages");
 		
@@ -215,7 +214,7 @@ public class MessageTools {
 		search.append("_id",new ObjectId(id_message));
 		
 		Document comm=new Document();
-		comm.append("_id",new ObjectId(id_comment));
+		comm.append("date",date);
 		
 		Document query=new Document();
 		query.append("$pull", new Document().append("listeCom", comm));

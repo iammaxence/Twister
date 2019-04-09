@@ -56,7 +56,7 @@ class FormulaireSaisieMessage extends Component {
 						<div className="form-inline">
 							<fieldset className="w-100 ">
 								<div className="form-inline ">
-									<textarea className="form-control w-85" id="twist" rows="4"	placeholder="Let's twist again"></textarea>
+									<textarea className="form-control w-85 fwhite" id="twist" rows="4"	placeholder="Let's twist again"></textarea>
 									<div className="w-15"><input className="btn green2 float-right" type="submit" value="Twist" onClick={((event)=>{this.send(document.getElementById("twist").value);document.getElementById("twist").value=''})} /></div>
 								</div>
 							</fieldset>

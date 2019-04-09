@@ -55,5 +55,10 @@ public class Database {
 	public static void MongoClose() {
 		mongo.close();
 	}
+
+	public static MongoCollection<Document> createCountersCollection() {
+		MongoDatabase mDB= mongo.getDatabase(DBStatic.mongodb_db);
+		return  mDB.getCollection("counter");
+	}
 }
 
