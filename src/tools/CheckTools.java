@@ -8,6 +8,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class CheckTools {
 	
 	/**
@@ -214,6 +217,37 @@ public class CheckTools {
 		catch (SQLException s) {
 			System.out.println(tools.ReturnJSON.serviceRefused("SQL ERROR", 110));
 			return false;
+		}
+	}
+	
+	public static JSONObject getKey(StringBuilder log) { //Verifie si user déjà connecté avec login
+		try {
+			
+			Connection conn= Database.getMySQLConnection();
+			
+			String query="SELECT * FROM session WHERE session.login='"+log.toString()+"'";
+			//System.out.println(query);
+			
+			Statement st=conn.createStatement();
+			ResultSet rs=st.executeQuery(query);
+			
+			if(rs.next()) {
+				JSONObject res=new JSONObject().put("key", rs.getString("key_user"));
+				rs.close();
+				st.close();
+				conn.close();
+				return res;
+			}
+			rs.close();
+			st.close();
+			conn.close();
+			return ReturnJSON.serviceRefused("error", -1);
+		}
+		catch (SQLException s) {
+			//System.out.println("herE"); // a enlever après test
+			return ReturnJSON.serviceRefused("SQL ERROR", 110);
+		} catch (JSONException e) {
+			return ReturnJSON.serviceRefused("JSON ERROR", 120);
 		}
 	}
 	

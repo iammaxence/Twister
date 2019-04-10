@@ -10,11 +10,16 @@ class Liste_Commentaire extends Component{
 		this.state={listeCom:this.props.listeCom};
 	}
 	send(comm){
-		const url= new URLSearchParams();
-		url.append("login",this.props.login);
-		url.append("id_message",this.props.id_msg);
-		url.append("text",comm);
-		axios.get("http://localhost:8080/Web/message/addcomment?"+url).then(res=> this.respcomm(res));
+		if(comm===''){
+			alert("Need text");
+		}
+		else{
+			const url= new URLSearchParams();
+			url.append("login",this.props.login);
+			url.append("id_message",this.props.id_msg);
+			url.append("text",comm);
+			axios.get("http://localhost:8080/Web/message/addcomment?"+url).then(res=> this.respcomm(res));
+		}
 	}
 	respcomm(resp){
 		if(resp.data["code"]){

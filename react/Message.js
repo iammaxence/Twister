@@ -64,10 +64,10 @@ class Message extends Component{
 		url.append("key",this.props.Ukey);
 		url.append("query",'');
 		if(this.props.page === "Principale"){
-			url.append("friends",this.props.liste_ami);
+			url.append("friends",'');
 		}
 		else{
-			url.append("friends",'');
+			url.append("friends",this.props.liste_ami);
 		}
 		axios.get("http://localhost:8080/Web/message/listmessage?"+url).then(res=> this.respliste(res));
 	}

@@ -62,7 +62,7 @@ class MainPage extends Component {
 		const url= new URLSearchParams();
 		url.append("id",msg);
 		url.append("key",this.state.Ukey);
-		axios.get("http://localhost:8080/Web/message/removemessage?"+url).then(this.getPrincipal());
+		axios.get("http://localhost:8080/Web/message/removemessage?"+url);
 	}
   deleteCom(id_msg,id_com){
     const url= new URLSearchParams();

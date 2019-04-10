@@ -37,7 +37,16 @@ class Login extends Component {
    
   resplogin(resp){
   	//console.log(resp.data);
-  	if(resp.data["code"]){
+  	if(resp.data["code"]===203){
+      alert("Already connected, logout and relogin..");
+      /*const url= new URLSearchParams();
+      url.append("key",this.props.Ukey);//CHOPER LA CLE
+      axios.get("http://localhost:8080/Web/auth/logout?"+url).then(res=> this.resplogin(res));
+      this.getListAmi(resp.data["Login"]);
+      this.getListCo(resp.data["Key"]);
+      this.props.login(resp.data["Login"],resp.data["Key"]);*/
+    }
+    if(resp.data["code"]){
   		alert(resp.data["message"]);
   	}
   	else{

@@ -32,11 +32,18 @@ class FormulaireSaisieMessage extends Component {
 		url.append("key",this.props.Ukey);
 		url.append("query",'');
 		if(this.props.page === "Principale"){
-			url.append("friends",this.props.liste_ami);
-		}
-		else{
 			url.append("friends",'');
 		}
+		else{
+      if(this.props.owner==="me"){
+        url.append("friends",this.props.user);
+      }
+			else{
+        url.append("friends",this.props.owner);
+      }
+		}
+    alert(this.props.page)
+    alert(url);
 		axios.get("http://localhost:8080/Web/message/listmessage?"+url).then(res=> this.respliste(res));
 	}
 	respliste(resp){

@@ -20,7 +20,7 @@ class Principale extends Component {
 			url.append("friends",'');
 		}
 		else{
-			url.append("friends","this.props.liste_ami");
+			url.append("friends",this.props.liste_ami);
 		}
 		axios.get("http://localhost:8080/Web/message/listmessage?"+url).then(res=> this.respliste(res));
 	}
@@ -42,7 +42,7 @@ class Principale extends Component {
 					
 					<div className="col-md-6 offset-md-2 white1">
 						<div className="row">
-							<FormulaireSaisieMessage login={this.props.login} Ukey={this.props.Ukey} liste_ami={this.props.liste_ami} refreshMsg={this.props.refreshMsg}/>
+							<FormulaireSaisieMessage login={this.props.login} Ukey={this.props.Ukey} liste_ami={this.props.liste_ami} refreshMsg={this.props.refreshMsg} owner={this.props.owner} user={this.props.user} page={this.props.page}/>
 							<div className="container-fluid">
 								<br/>
 								<div className="botbar"></div> 

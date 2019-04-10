@@ -18,7 +18,7 @@ class NavigationPannel extends Component{
 		}else if (this.props.connected){//Page principale
 			temp=<Principale liste_co={this.props.liste_co} delete={this.props.delete} deleteCom={this.props.deleteCom} login={this.props.login} logout={this.props.logout} page={this.props.page} profil={this.props.profil} principale={this.props.principale}	owner={this.props.owner} liste_msg={this.props.liste_msg} liste_ami={this.props.liste_ami} user={this.props.user} Ukey={this.props.Ukey} refreshMsg={this.props.refreshMsg}/>;
 		}else {//Page de connexion
-			temp=<Login login={this.props.login} register={this.props.register} getListAmi={this.props.getListAmi} refreshMsg={this.props.refreshMsg} getListCo={this.props.getListCo}/>;
+			temp=<Login login={this.props.login} logout={this.props.logout} register={this.props.register} getListAmi={this.props.getListAmi} refreshMsg={this.props.refreshMsg} getListCo={this.props.getListCo}/>;
 		}
 		
 		return (
