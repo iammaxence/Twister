@@ -31,22 +31,17 @@ class Login extends Component {
 	  var password=this.refs.password.value;
 	  url.append("login",login);
 	  url.append("password",password);
-	  //alert("http://localhost:8080/Web/auth/login?"+url);
 	  axios.get("http://localhost:8080/Web/auth/login?"+url).then(res=> this.resplogin(res));
   }
    
   resplogin(resp){
-  	//console.log(resp.data);
-  	if(resp.data["code"]===203){
+  	if(resp.data.code===203){
       alert("Already connected, logout and relogin..");
-      /*const url= new URLSearchParams();
-      url.append("key",this.props.Ukey);//CHOPER LA CLE
-      axios.get("http://localhost:8080/Web/auth/logout?"+url).then(res=> this.resplogin(res));
-      this.getListAmi(resp.data["Login"]);
-      this.getListCo(resp.data["Key"]);
-      this.props.login(resp.data["Login"],resp.data["Key"]);*/
+      const url= new URLSearchParams();
+      url.append("login",this.refs.login.value);
+      axios.get("http://localhost:8080/Web/user/getkey?"+url).then(res=> this.logout(res));
     }
-    if(resp.data["code"]){
+    else if(resp.data["code"]){
   		alert(resp.data["message"]);
   	}
   	else{
@@ -54,6 +49,11 @@ class Login extends Component {
 	  	this.getListCo(resp.data["Key"]);
   		this.props.login(resp.data["Login"],resp.data["Key"]);
   	}
+  }
+  logout(resp){
+    const url= new URLSearchParams();
+    url.append("key",resp.data.key);
+    axios.get("http://localhost:8080/Web/auth/logout?"+url).then(this.send());
   }
 
   getListCo(key){

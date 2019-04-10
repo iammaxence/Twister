@@ -42,8 +42,8 @@ class FormulaireSaisieMessage extends Component {
         url.append("friends",this.props.owner);
       }
 		}
-    alert(this.props.page)
-    alert(url);
+    //alert(this.props.page)
+    //alert(url);
 		axios.get("http://localhost:8080/Web/message/listmessage?"+url).then(res=> this.respliste(res));
 	}
 	respliste(resp){

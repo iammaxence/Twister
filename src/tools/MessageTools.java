@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -172,9 +173,25 @@ public class MessageTools {
 		}
 	}
 
-	public static JSONObject listByQuery(String key, String query) {
-		// TODO Auto-generated method stub
-		return null;
+	public static JSONObject listByQuery(String key, String query) throws JSONException {
+		Database.MongoOpen();
+		MongoCollection <Document> coll = Database.getMongocollection("messages");
+		MapReduce.mapreduce();
+		MongoCollection <Document> index = Database.getMongocollection("index");
+		ArrayList<Document> messages=MapReduce.getMessageByQuery(index, coll, query);
+		JSONArray res=new JSONArray();
+		for(Document d:messages) { 
+			JSONObject o=new JSONObject();
+			o.put("id", d.get("id"));
+			o.put("login", d.get("login"));
+			o.put("date", d.get("date"));
+			o.put("message", d.get("message"));
+			o.put("listeCom", d.get("listeCom"));
+			o.put("listeLike", d.get("listeLike"));
+			res.put(o);
+			//System.out.println(res);
+		}
+		return new JSONObject().put("messages", res);
 	}
 
 	public static JSONObject removeMessage(String id) {

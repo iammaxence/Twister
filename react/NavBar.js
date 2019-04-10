@@ -9,7 +9,17 @@ import axios from 'axios';
 
 class NavBar extends Component{
 	search(requete){
-		alert("Marche po ¯\\_(ツ)_/¯");
+		//alert("Marche po ¯\\_(ツ)_/¯");
+		const url= new URLSearchParams();
+		url.append("key",this.props.Ukey);
+		url.append("query",requete);
+		url.append("friends",'');
+		console.log("http://localhost:8080/Web/message/listmessage?"+url);
+		axios.get("http://localhost:8080/Web/message/listmessage?"+url).then(res=> this.query(res));
+	}
+	query(resp){
+		console.log(resp.data["messages"]);
+		this.props.refreshMsg(resp.data["messages"]);
 	}
 	profil(){
 		this.props.profil("me");
@@ -18,6 +28,7 @@ class NavBar extends Component{
 		//this.props.logout();
 		const url= new URLSearchParams();
 		url.append("key",this.props.Ukey);
+		//console.log("http://localhost:8080/Web/auth/logout?"+url)
 		axios.get("http://localhost:8080/Web/auth/logout?"+url).then(res=> this.resplogin(res));
 	}
 	resplogin(resp){

@@ -8,7 +8,7 @@ import tools.MapReduce;
 public class testMongoDB {
 	public static void main(String[] args) {
 		//Message a = new Message();
-		//Message.postMessage("IdqPezXRqStIajJA", "CELUI CELUI CELUI CELUI");
+		//Message.postMessage("Dyw8rjyCSwB0zOpB", "deux pierre paul jean");
 		//a.postMessage("gMkEGTJsoycwKXs9", "Bonjour je suis tata");
 		//a.postMessage("gMkEGTJsoycwKXs9", "Moi,tata a faim");
 		//a.postMessage("I8dZFCw2eTzYY1Po", "Salut, je suis toto");
@@ -18,8 +18,9 @@ public class testMongoDB {
 		//Likes.addLike("joris lecon", "5ca906120e66e036a43efcf9");
 		//Comments.postComment("tata", "5cac9c0cfbb7b87094911d02", "COMMENTAIRE");
 		//Comments.removeComment("tata", "5cac9c0cfbb7b87094911d02", "2019-04-09 15:20:29");
-		//Message.listMessage("IdqPezXRqStIajJA", "" , "");
-		MapReduce.mapreduce();
+		//Message.listMessage("Dyw8rjyCSwB0zOpB", "" , "");
+		//MapReduce.mapreduce();
+		System.out.println(Message.listMessage("4tMx0Rawvxf7TP48", "deux", "")); 
 	}
 	
 }

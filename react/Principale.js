@@ -30,13 +30,14 @@ class Principale extends Component {
 			alert(resp.data["message"]);
 		}
 		else{
+			console.log(resp.data["messages"])
 			this.props.refreshMsg(resp.data["messages"]);
 		}
 	}
 	render(){
 		return(
 			<div className="Principale">
-				<NavBar logout={this.props.logout} principale={this.props.principale} profil={this.props.profil} user={this.props.user} Ukey={this.props.Ukey}/>
+				<NavBar logout={this.props.logout} principale={this.props.principale} profil={this.props.profil} user={this.props.user} Ukey={this.props.Ukey} refreshMsg={this.props.refreshMsg}/>
 				<br/>
 				<div className="row">
 					

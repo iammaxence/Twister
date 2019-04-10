@@ -1,5 +1,6 @@
 package services;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import tools.CheckTools;
@@ -36,7 +37,11 @@ public class Message {
 		if(!CheckTools.alreadyConnected(new StringBuilder(UserTools.getLoginUser(key))))
 			return ReturnJSON.serviceRefused("USER DISCONNECTED", 701);
 		if(!query.isEmpty() && friends.isEmpty())
-			return MessageTools.listByQuery(key,query);
+			try {
+				return MessageTools.listByQuery(key,query);
+			} catch (JSONException e) {
+				return ReturnJSON.serviceRefused("ERROR JSON", 0);
+			}
 		else if(!friends.isEmpty() && query.isEmpty())
 			return MessageTools.listProfile(key,friends);
 		else
