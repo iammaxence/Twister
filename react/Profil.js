@@ -76,7 +76,12 @@ class Profil extends Component{
 			this.setState({followed:false});
 		}
 		else{
-			this.setState({followed: nextP.liste_ami.find(ami=>ami.friend === nextP.owner) !== undefined})
+			if(nextP.owner.length===1){
+				this.setState({followed: nextP.liste_ami.find(ami=>ami.friend === nextP.owner[0]) !== undefined})
+			}
+			else{
+				this.setState({followed: nextP.liste_ami.find(ami=>ami.friend === nextP.owner) !== undefined})
+			}
 		}
 		
 	}
@@ -119,7 +124,7 @@ class Profil extends Component{
 
 		return (
 			<div className="Profil">
-				<NavBar logout={this.props.logout} principale={this.props.principale} profil={this.props.profil} user={this.props.user} Ukey={this.props.Ukey}/>
+				<NavBar logout={this.props.logout} principale={this.props.principale} profil={this.props.profil} user={this.props.user} Ukey={this.props.Ukey} refreshQuery={this.props.refreshQuery}/>
 				<br/>
 				<div className="row">
 					
@@ -153,7 +158,7 @@ class Profil extends Component{
 								<div className="botbar"></div> 
 								<br/>
 						</div>
-						<Liste_msg liste_msg={this.props.liste_msg} profil={this.props.profil} delete={this.props.delete} deleteCom={this.props.deleteCom}  owner={this.props.owner} user={this.props.user} page={this.props.page} Ukey={this.props.Ukey} refreshMsg={this.props.refreshMsg}/>
+						<Liste_msg liste_msg={this.props.liste_msg} profil={this.props.profil} delete={this.props.delete} deleteCom={this.props.deleteCom} user={this.props.user} page={this.props.page} Ukey={this.props.Ukey} refreshMsg={this.props.refreshMsg}/>
 					</div>
 					<div className="col-md-2 column white2">
 						<br/>

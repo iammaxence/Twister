@@ -20,7 +20,7 @@ public class testMongoDB {
 		//Comments.removeComment("tata", "5cac9c0cfbb7b87094911d02", "2019-04-09 15:20:29");
 		//Message.listMessage("Dyw8rjyCSwB0zOpB", "" , "");
 		//MapReduce.mapreduce();
-		System.out.println(Message.listMessage("4tMx0Rawvxf7TP48", "deux", "")); 
+		System.out.println(Message.listMessage("z6S5ydfC5xeqBYhQ", "deux", "")); 
 	}
 	
 }

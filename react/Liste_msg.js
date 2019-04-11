@@ -9,13 +9,17 @@ class Liste_msg extends Component{
 
 	render() {
 		var temp;
-		//console.log(this.props.liste_msg);
 		if(this.props.liste_msg === 'empty' || this.props.liste_msg === undefined ){
 			temp=<label>Pas de Messages</label>;
 		}
 		else { 
 			temp=this.props.liste_msg.map(messages => {
-					return <Message message={messages.message} autor={messages.login} date={messages.date} listeCom={messages.listeCom} listeLike={messages.listeLike} profil={this.props.profil} owner={this.props.owner} Ukey={this.props.Ukey} user={this.props.user} id={messages.id} refreshMsg={this.props.refreshMsg} page={this.props.page} delete={this.props.delete} deleteCom={this.props.deleteCom}/>;
+					return <Message message={messages.message} autor={messages.login} date={messages.date[0]} listeCom={messages.listeCom} listeLike={messages.listeLike[0]} profil={this.props.profil} Ukey={this.props.Ukey} user={this.props.user} id={messages.id} refreshMsg={this.props.refreshMsg} page={this.props.page} delete={this.props.delete} deleteCom={this.props.deleteCom}/>;
+			});
+		}
+		if(this.props.page==="Query"){
+			temp=this.props.liste_query.map(messages => {
+					return <Message message={messages.message} autor={messages.login} date={messages.date[0]} listeCom={messages.listeCom} listeLike={messages.listeLike[0]} profil={this.props.profil} Ukey={this.props.Ukey} user={this.props.user} id={messages.id} refreshMsg={this.props.refreshMsg} page={this.props.page} delete={this.props.delete} deleteCom={this.props.deleteCom}/>;	
 			});
 		}
 		return (

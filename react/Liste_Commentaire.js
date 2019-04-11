@@ -40,19 +40,24 @@ class Liste_Commentaire extends Component{
 		}
 	}
 
-	
-
 	componentWillReceiveProps(nextProps){
 		this.setState({listeCom:nextProps.listeCom});
 	}
 
 	render(){
 		var temp;
-		console.log(this.state.listeCom[0])
+		console.log(this.state.listeCom)
 		if(this.state.listeCom[0].length !== 0){
-			temp=this.state.listeCom[0].map(commentaires => {
+			try{
+				temp=this.state.listeCom[0].map(commentaires => {
 							return <Commentaire commentaire={commentaires.content} deleteCom={this.props.deleteCom} autor={commentaires.author} date={commentaires.date} user={this.props.login} id_msg={this.props.id_msg}/>;
-			});
+				});
+			}
+			catch{
+				temp=this.state.listeCom.map(commentaires => {
+							return <Commentaire commentaire={commentaires.content} deleteCom={this.props.deleteCom} autor={commentaires.author} date={commentaires.date} user={this.props.login} id_msg={this.props.id_msg}/>;
+				});
+			}
 		}
 		else { 
 			temp=<label>Ajoutez votre commentaire</label>;

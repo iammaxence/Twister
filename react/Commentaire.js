@@ -8,6 +8,9 @@ class Commentaire extends Component{
 		super(props);
 		this.state={commentaire:this.props.commentaire,autor:this.props.autor,date:this.props.date,showed:true};
 	}
+	componentWillReceiveProps(nextProps){
+		this.setState({commentaire:nextProps.commentaire,autor:nextProps.autor,date:nextProps.date,showed:true});
+	}
 
 	render() {
 		//Conversion date

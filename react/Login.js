@@ -82,7 +82,7 @@ class Login extends Component {
 		    			<img src={logo} alt="Twister"/>
 		    		</div>
 
-				    <div className="login100-form validate-form "onKeyPress= {(e) => {if(e.key === 'Enter'){this.send()}}}>
+				    <div className="login100-form validate-form " onKeyPress= {(e) => {if(e.key === 'Enter'){this.send()}}}>
 					    <span className="login100-form-title">
 					      Member Login
 					    </span>

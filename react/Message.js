@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Collapse from 'react-bootstrap/Collapse';
 import Modal from 'react-bootstrap/Modal';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
@@ -10,13 +11,13 @@ import del from './html-css/images/garbage.png';
 import plus from './html-css/images/expand-button.png';
 import moins from './html-css/images/expand-arrow.png';
 import Liste_Commentaire from './Liste_Commentaire.js';
-import axios from 'axios';
+
 
 
 class Message extends Component{
 	constructor(props){
 		super(props);
-		this.state={showed:true,message:this.props.message,autor:this.props.autor,date:this.props.date,listeCom:this.props.listeCom,listeLike:this.props.listeLike,id:this.props.id,buttonCom:false,buttonLike:false,liked:this.props.listeLike[0].includes(this.props.user),likelength:this.props.listeLike[0].length};
+		this.state={showed:true,message:this.props.message,autor:this.props.autor,date:this.props.date,listeCom:this.props.listeCom,listeLike:this.props.listeLike,id:this.props.id,buttonCom:false,buttonLike:false,liked:this.props.listeLike.includes(this.props.user),likelength:this.props.listeLike.length};
 	}
 	getCom(){
 		this.setState({buttonCom: !this.state.buttonCom});
@@ -28,15 +29,15 @@ class Message extends Component{
 		if(this.state.liked === false){
 			const url= new URLSearchParams();
 			url.append("login",this.props.user);
-			url.append("id_message",this.props.id);
-			//alert("http://localhost:8080/Web/auth/login?"+url);
+			url.append("id_message",this.state.id);
+			console.log("http://localhost:8080/Web/auth/login?"+url);
 			axios.get("http://localhost:8080/Web/message/addlike?"+url).then(res=> this.resplikeadd(res));
 		}
 		else{
 			const url= new URLSearchParams();
 			url.append("login",this.props.user);
-			url.append("id_message",this.props.id);
-			//alert("http://localhost:8080/Web/auth/login?"+url);
+			url.append("id_message",this.state.id);
+			console.log("http://localhost:8080/Web/auth/login?"+url);
 			axios.get("http://localhost:8080/Web/message/removelike?"+url).then(res=> this.resplikerem(res));
 		}
 		this.setState({liked: !this.state.liked});
@@ -83,7 +84,7 @@ class Message extends Component{
 
 	componentWillReceiveProps(nextProps){
 		if(nextProps.message!==this.props.message){
-			this.setState({showed:true,message:nextProps.message,autor:nextProps.autor,date:nextProps.date,listeCom:nextProps.listeCom,listeLike:nextProps.listeLike,id:nextProps.id,likelength:nextProps.listeLike[0].length})
+			this.setState({showed:true,message:nextProps.message,autor:nextProps.autor,date:nextProps.date,listeCom:nextProps.listeCom,listeLike:nextProps.listeLike,id:nextProps.id,likelength:nextProps.listeLike.length})
 		}
 	}
 
@@ -93,16 +94,16 @@ class Message extends Component{
 		var likelength=this.state.likelength;
 		
 		if (this.state.buttonCom === true && this.state.listeCom !== null){
-			comm=<Liste_Commentaire page={this.props.page} listeCom={this.props.listeCom} refresh={this.refresh.bind(this)} refreshMsg={this.props.refreshMsg} login={this.props.user} autor={this.state.autor} deleteCom={this.props.deleteCom} id_msg={this.state.id} Ukey={this.props.Ukey} profil={this.props.profil}/>;
+			comm=<Liste_Commentaire page={this.props.page} listeCom={this.props.listeCom} refresh={this.refresh.bind(this)} login={this.props.user} autor={this.state.autor} deleteCom={this.props.deleteCom} id_msg={this.state.id} profil={this.props.profil}/>;
 		}
 		var like='';
 		//console.log(this.state.message)
 		//console.log(this.state.listeLike)
-		if (this.state.listeLike[0].length === 0){
+		if (this.state.listeLike.length === 0){
 			like=<label>Pas de like</label>
 		}
 		else{
-			this.state.listeLike[0].forEach(function(item){like+=item+"\n"});
+			this.state.listeLike.forEach(function(item){like+=item+"\n"});
 			//console.log(like)
 		}
 		var deleteB;
@@ -116,7 +117,7 @@ class Message extends Component{
 		}
 
 		//Conversion date
-		var split=this.state.date[0].split(' ');
+		var split=this.state.date.split(' ');
 		var jour=split[0].split('-');
 		var heure=split[1].split(':',2);
 		var annee=jour[0].split('');

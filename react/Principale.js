@@ -30,14 +30,14 @@ class Principale extends Component {
 			alert(resp.data["message"]);
 		}
 		else{
-			console.log(resp.data["messages"])
+			//console.log(resp.data["messages"])
 			this.props.refreshMsg(resp.data["messages"]);
 		}
 	}
 	render(){
 		return(
 			<div className="Principale">
-				<NavBar logout={this.props.logout} principale={this.props.principale} profil={this.props.profil} user={this.props.user} Ukey={this.props.Ukey} refreshMsg={this.props.refreshMsg}/>
+				<NavBar logout={this.props.logout} principale={this.props.principale} profil={this.props.profil} user={this.props.user} Ukey={this.props.Ukey} refreshMsg={this.props.refreshMsg} refreshQuery={this.props.refreshQuery}/>
 				<br/>
 				<div className="row">
 					
@@ -49,7 +49,7 @@ class Principale extends Component {
 								<div className="botbar"></div> 
 								<br/>
 							</div>
-							<Liste_msg liste_msg={this.props.liste_msg} profil={this.props.profil} delete={this.props.delete} deleteCom={this.props.deleteCom} owner={this.props.owner} user={this.props.user} page={this.props.page} Ukey={this.props.Ukey} refreshMsg={this.props.refreshMsg}/>
+							<Liste_msg liste_msg={this.props.liste_msg} profil={this.props.profil} delete={this.props.delete} deleteCom={this.props.deleteCom} user={this.props.user} page={this.props.page} Ukey={this.props.Ukey} refreshMsg={this.props.refreshMsg}/>
 						</div>
 					</div>
 					<div className="col-md-2 column white2">

@@ -18,7 +18,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
 public class MessageTools {
-	private static int id=0;
+	//private static int id=0;
 	public static JSONObject postMessage(String key, String text) {
 
 		Database.MongoOpen();
@@ -179,19 +179,19 @@ public class MessageTools {
 		MapReduce.mapreduce();
 		MongoCollection <Document> index = Database.getMongocollection("index");
 		ArrayList<Document> messages=MapReduce.getMessageByQuery(index, coll, query);
-		JSONArray res=new JSONArray();
+		JSONObject res=new JSONObject();
 		for(Document d:messages) { 
-			JSONObject o=new JSONObject();
-			o.put("id", d.get("id"));
-			o.put("login", d.get("login"));
-			o.put("date", d.get("date"));
-			o.put("message", d.get("message"));
-			o.put("listeCom", d.get("listeCom"));
-			o.put("listeLike", d.get("listeLike"));
-			res.put(o);
+			JSONObject temp=new JSONObject();
+			temp.append("message",d.get("message"));
+			temp.append("login", d.getString("login"));
+			temp.append("date", d.getString("date"));
+			temp.append("listeLike", d.get("listeLike"));
+			temp.append("listeCom", d.get("listeCom"));
+			temp.append("id", d.get("_id"));
+			res.append("messages", temp);
 			//System.out.println(res);
 		}
-		return new JSONObject().put("messages", res);
+		return res;
 	}
 
 	public static JSONObject removeMessage(String id) {

@@ -9,18 +9,23 @@ import axios from 'axios';
 
 class NavBar extends Component{
 	search(requete){
-		//alert("Marche po ¯\\_(ツ)_/¯");
-		const url= new URLSearchParams();
-		url.append("key",this.props.Ukey);
-		url.append("query",requete);
-		url.append("friends",'');
-		console.log("http://localhost:8080/Web/message/listmessage?"+url);
-		axios.get("http://localhost:8080/Web/message/listmessage?"+url).then(res=> this.query(res));
+		if(requete===''){
+			alert("Need request");
+		}
+		else{
+			const url= new URLSearchParams();
+			url.append("key",this.props.Ukey);
+			url.append("query",requete);
+			url.append("friends",'');
+			console.log("http://localhost:8080/Web/message/listmessage?"+url);
+			axios.get("http://localhost:8080/Web/message/listmessage?"+url).then(res=> this.query(res,requete));
+		}
 	}
-	query(resp){
-		console.log(resp.data["messages"]);
-		this.props.refreshMsg(resp.data["messages"]);
+	query(resp,query){
+		//console.log(resp.data["messages"]);
+		this.props.refreshQuery(resp.data["messages"],query);
 	}
+
 	profil(){
 		this.props.profil("me");
 	}
@@ -58,10 +63,10 @@ class NavBar extends Component{
 							</ul>
 						</div>
 						<div className="navbar-collapse collapse w-100 justify-content-center">
-							<form className="form-inline">
+							<div className="form-inline" onKeyPress= {(e) => {if(e.key === 'Enter'){this.search(document.getElementById("search").value)}}}>
 								<input className="form-control mr-sm-2" id="search" type="text" placeholder="Search"/>
 								<img type="image" className="cursor" width="35px" src={search} alt="search" value="Search" onClick={(event)=>this.search(document.getElementById("search").value)} />
-							</form>
+							</div>
 						</div>
 						<div className="navbar-collapse collapse w-100 order-3">
 							<ul className="navbar-nav ml-auto pt-1">
