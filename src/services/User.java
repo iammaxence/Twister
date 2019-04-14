@@ -31,7 +31,7 @@ public class User {
 
 	public static JSONObject listCo(String key) {
 		if(!CheckTools.alreadyConnected(new StringBuilder(UserTools.getLoginUser(key))))
-			return ReturnJSON.serviceRefused("User Disconnected", 501);
+			return ReturnJSON.serviceRefused("User Disconnected", 1101);
 
 		return UserTools.listCo();
 	}

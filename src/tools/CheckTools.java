@@ -241,7 +241,7 @@ public class CheckTools {
 			rs.close();
 			st.close();
 			conn.close();
-			return ReturnJSON.serviceRefused("error", -1);
+			return ReturnJSON.serviceRefused("User not found", 1201);
 		}
 		catch (SQLException s) {
 			//System.out.println("herE"); // a enlever après test
